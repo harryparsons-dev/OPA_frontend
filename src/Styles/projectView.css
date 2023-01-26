@@ -1,0 +1,135 @@
+.projectView{
+    margin:10px;
+
+}
+.projectView .p-heading{
+    padding: 10px;
+    padding-bottom: 20px;
+
+    text-align: center;
+    position: sticky;
+    font-size: 1.3em;
+}
+
+.projectView .text{
+    position: relative;
+    padding-left: 20%;
+    padding-right:20%;
+}
+
+
+.projectView .p-post{
+    height: 100%;
+    width: 350px;
+    padding: 10px;
+    object-fit: contain;
+
+    outline-color: gray;
+
+    margin-bottom: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 5px;
+
+    animation: 0.7s ease-in 0s 1 fadeUp;
+/*
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); */
+}
+.projectView .p-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    /* padding-top: 300px; */
+    margin: 2%  15%  0  15%;
+}
+
+.p-post img{
+    width: auto;
+    height: auto;
+    max-width:100%;
+    max-height:100%;
+    transition: 0.5s ease;
+
+
+}
+.p-post img:hover{
+    opacity: 0.3;
+
+}
+
+.projectView .p-post .cap{
+    margin-top: 10px;
+    padding:5px;
+    font-size: 1.1em;
+    font-weight: lighter;
+    color: grey;
+
+
+}
+
+.projects{
+    display: flex;
+    flex-direction: column;
+
+    float:left;
+    z-index: 20;
+    position: absolute;
+
+}
+.project{
+    margin:20px;
+    z-index: 21;
+    transition: 0.3s ease;
+    display: inline-block;
+    position: relative;
+
+}
+/* .project::after{
+    content: '';
+    position: absolute;
+    padding-left: 5%;
+    width: 95%;
+    text-align: center;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    transform-origin: bottom right;
+    transition: transform 0.35s ease-out;
+} */
+/* .project:hover::after{
+    transform: scaleX(1);
+  transform-origin: bottom left;
+} */
+.project:hover{
+    opacity: 0.5;
+
+}
+
+
+
+@media (max-width: 600px) {
+
+    .projectView .text{
+        padding: 0;
+    }
+    .projectView .p-content{
+        margin: 0;
+    }
+    .projects{
+        flex-direction: row;
+        position: relative;
+        flex-wrap: wrap;
+        padding-bottom: 20px;
+        justify-content: center;
+        width: 100%;
+    }
+    .project{
+        margin:10px;
+
+    }
+}

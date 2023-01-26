@@ -1,0 +1,13 @@
+.project{
+    text-align: center;
+    text-decoration: none;
+}
+
+.cats{
+    margin: 50px;
+    text-decoration: none;
+}
+
+.cats a:hover{
+    border-bottom: 2px solid black;
+}

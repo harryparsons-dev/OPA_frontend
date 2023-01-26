@@ -1,0 +1,40 @@
+@keyframes fade{
+    0%{
+
+        opacity: 0;
+    }
+    100%{
+
+        opacity: 100;
+    }
+}
+
+
+
+.home-slider{
+
+}
+.h-image-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.h-image{
+
+    align-items: center;
+    width: auto;
+    max-width: 85vw;
+    max-height: 85vh;
+    animation: 2s linear 0s fade;
+}
+
+@media (max-width: 600px) {
+    .home-slider{
+        height: 75vh;
+        overflow: hidden;
+
+    }
+}

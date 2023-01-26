@@ -1,0 +1,89 @@
+ {post.attributes.media.data.map((image,id) => {
+                                return(
+                                    <div key={id}>
+                                        <img
+                                        src={api + image.attributes.formats.thumbnail.url}/>
+                                    <p>{post.attributes.caption}</p>
+                                    </div>
+                                );
+                            })}
+
+
+
+
+
+const POSTS = gql`
+query getPosts{
+ 
+    posts(filters: {catagory:{id: {eq: $id}}}){
+        data{
+            id
+            attributes{
+                title
+              catagory{
+                data{
+                	id
+                  
+                }
+            }  
+              
+            }
+        }
+    }
+}
+
+`;
+
+
+
+.title{
+    text-align: center;
+    font-style: normal;
+    font-weight: 700;
+  
+    padding: 20px;
+    z-index: 0;
+    
+    
+}
+
+
+navbar
+
+.navbar{
+    background-color: #778899;
+    position: right;
+    text-align: center;
+    
+    width: 125px;
+    z-index: 1;
+    height: 100%;
+    position: fixed;
+    display: inline-block;
+
+    top:0;
+    left:0;
+    overflow-x: hidden;
+
+
+
+}
+
+.navbar li{  
+    padding: 10px;
+    
+    list-style-type: none;
+}
+
+li:hover{
+    text-decoration: underline;
+}
+
+
+
+
+hi
+
+
+
+ <h1> {data.posts.data[1].attributes.category.data.attributes.Category_name}</h1>

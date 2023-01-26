@@ -1,0 +1,131 @@
+.Gallery{
+
+}
+
+.ImageSlider{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left:0;
+    right:0;
+
+    top:0;
+    /* margin-top:-81.25px; */
+    background-color: white;
+    opacity: 95% !important;
+    z-index: 21;
+    scroll-behavior:auto;
+    overflow: hidden;
+
+
+
+
+}
+
+
+.slider{
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image{
+
+    align-items: center;
+    width: auto;
+    max-width: 85vw;
+    max-height: 85vh;
+
+}
+.video{
+    align-items: center;
+    width: auto;
+    max-width: 85vw;
+    max-height: 85vh;
+}
+
+.right-arrow{
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    font-size: 3rem;
+    color: black;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+    font-weight:lighter;
+
+}
+
+
+.left-arrow{
+    position: absolute;
+    top: 50%;
+    left: 32px;
+    font-size: 3rem;
+    color: black;
+    z-index: 10;
+    cursor: pointer;
+    user-select: none;
+
+}
+
+.slide{
+    opacity: 0;
+
+
+}
+
+.slide.active{
+    opacity: 1;
+    transition-duration: 0.8s;
+    transform: scale(1);
+}
+
+
+.close{
+    font-size: 2em;
+    opacity: 90%;
+    position: absolute;
+    margin-left: 2%;
+    margin-top: 2%;
+    float:right;
+    left:90%;
+    z-index: 20;
+    background-color: rgba(189, 184, 184, 0);
+    outline: inherit;
+    border: none;
+    cursor: pointer;
+
+
+
+}
+
+@media (max-width: 600px) {
+    .left-arrow{
+        left:0px;
+        font-size: 2em;
+    }
+    .right-arrow{
+        right: 0px;
+        font-size: 2em;
+    }
+    .App{
+        margin: 0px !important;
+
+    }
+    .close{
+        padding-top:7px;
+        padding-right:7px;
+        padding-left:0px;
+        left:88%
+    }
+    .i-content{
+        padding:3%;
+    }
+
+
+
+}

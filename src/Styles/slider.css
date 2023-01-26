@@ -1,0 +1,14 @@
+.swiper{
+    height: 100vh;
+    width: 100%;
+}
+
+img{
+    width:100%;
+
+}
+.swiper-wrapper{
+   background-size: cover;
+   height: 70%;
+   width: auto;
+}
