@@ -1,16 +1,8 @@
 import React from "react";
-import AnimatedRoutes from './AnimatedRoutes';
-
-
+import AnimatedRoutes from "./AnimatedRoutes";
 
 const Main = () => {
-
-  return (
- 
-    <AnimatedRoutes/>
-
-  );
-
-}
+  return <AnimatedRoutes />;
+};
 
 export default Main;

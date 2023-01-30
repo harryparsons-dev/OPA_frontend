@@ -3,7 +3,7 @@
 }
 @keyframes fadeUp{
     0%{
-        transform: translateY(7%);
+        transform: translateY(5%);
         opacity: 0;
     }
     100%{
@@ -147,6 +147,12 @@
     color: grey;
 
 
+}
+.Bounce{
+    display: "absolute";
+    margin: "0 auto";
+    top:50%;
+    left:50%;
 }
 
 @media (max-width: 600px) {

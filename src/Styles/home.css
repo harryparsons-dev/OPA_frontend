@@ -7,6 +7,8 @@
 
         opacity: 100;
     }
+
+
 }
 
 
@@ -28,8 +30,11 @@
     width: auto;
     max-width: 85vw;
     max-height: 85vh;
-    animation: 2s linear 0s fade;
+    animation: fade 3s ease 0s  alternate;
 }
+
+
+
 
 @media (max-width: 600px) {
     .home-slider{
