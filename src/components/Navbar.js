@@ -36,7 +36,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
       </li>
       <li>
         <Link
-          to="/Projects/art-show"
+          to="/Projects/peckham-pelican"
           onClick={() => {
             setNavbarOpen(false);
             handleToggle();
