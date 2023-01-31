@@ -34,7 +34,7 @@ function getImages(data) {
 
 function Home() {
   const [props, setProps] = useState([]);
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(0);
   const [loading, setLoading] = useState(true);
   const raw_data = async () => {
     const response = await fetch(`${api + "/api/homepages?populate=*"}`);
