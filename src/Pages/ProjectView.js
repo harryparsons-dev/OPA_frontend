@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { Link, useParams } from "react-router-dom";
 import "../Styles/projectView.css";
 const api = process.env.REACT_APP_IMAGEURL;
@@ -93,7 +94,9 @@ function ProjectView() {
           {data.posts.data[0].attributes.catagory.data.attributes.project_name}
         </div>
         <div className="text">
-          {data.posts.data[0].attributes.catagory.data.attributes.Projecttext}
+          <ReactMarkdown>
+            {data.posts.data[0].attributes.catagory.data.attributes.Projecttext}
+          </ReactMarkdown>
         </div>
 
         <div className="p-content">

@@ -1,28 +1,7 @@
-import { gql } from "@apollo/client";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import "../Styles/home.css";
 const api = process.env.REACT_APP_APIURL;
-const userEmail = process.env.userEmail;
-const userPassword = process.env.userPassword;
-
-const PROPS = gql`
-  query getHome {
-    homepages {
-      data {
-        attributes {
-          image {
-            data {
-              attributes {
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 function getImages(data) {
   var images = [];

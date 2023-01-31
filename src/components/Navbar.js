@@ -1,9 +1,23 @@
+import { gql, useQuery } from "@apollo/client";
 import { motion } from "framer-motion";
-import React from "react";
+import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../Styles/Navbar.css";
+const api = process.env.REACT_APP_APIURL;
 
-function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
+const PROJ = gql`
+  query getPosts {
+    catagories {
+      data {
+        attributes {
+          UID
+        }
+      }
+    }
+  }
+`;
+
+function Navbar({ navbarOpen, setNavbarOpen, handleToggle, project }) {
   return (
     <motion.ul
       className="navbar"
@@ -36,7 +50,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
       </li>
       <li>
         <Link
-          to="/Projects/peckham-pelican"
+          to={`/Projects/${project}`}
           onClick={() => {
             setNavbarOpen(false);
             handleToggle();
