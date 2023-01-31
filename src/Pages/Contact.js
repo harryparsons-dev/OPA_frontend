@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { FaEnvelope, FaInstagram } from "react-icons/fa";
 import contactImage from "../images/contactpage.jpg";
 import "../Styles/contact.css";
 

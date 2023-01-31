@@ -1,7 +1,6 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import CrossfadeImage from "react-crossfade-image";
 import "../Styles/home.css";
 const api = process.env.REACT_APP_APIURL;
 const userEmail = process.env.userEmail;

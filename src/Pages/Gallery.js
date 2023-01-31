@@ -1,8 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { motion } from "framer-motion";
-import React, { CSSProperties, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import BounceLoader from "react-spinners/BounceLoader";
 import "../Styles/Gallery.css";
 const imagesapi = process.env.REACT_APP_IMAGEURL;
 const api = process.env.REACT_APP_APIURL;

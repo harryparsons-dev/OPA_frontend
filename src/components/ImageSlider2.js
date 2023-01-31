@@ -2,12 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import {
-  FaArrowAltCircleLeft,
-  FaArrowAltCircleRight,
-  FaGreaterThan,
-  FaLessThan,
-} from "react-icons/fa";
+import { FaGreaterThan, FaLessThan } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import "../Styles/ImageSlider.css";
 const api = process.env.REACT_APP_IMAGEURL;

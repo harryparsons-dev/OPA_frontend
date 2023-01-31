@@ -6,7 +6,6 @@ import Contact from "../Pages/Contact";
 import Gallery from "../Pages/Gallery";
 import Home from "../Pages/Home";
 import ProjectView from "../Pages/ProjectView";
-import Slider from "../Pages/Slider";
 import ImageSlider from "./ImageSlider";
 import ImageSlider2 from "./ImageSlider2";
 
@@ -28,7 +27,6 @@ function AnimatedRoutes() {
         ></Route>
         <Route path="/About" element={<About />}></Route>
         <Route path="/Contact" element={<Contact />}></Route>
-        <Route path="/img" element={<Slider />}></Route>
       </Routes>
     </AnimatePresence>
   );
