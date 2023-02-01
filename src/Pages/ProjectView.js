@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { Link, useParams } from "react-router-dom";
+import sanitizeHtml from "sanitize-html";
 import "../Styles/projectView.css";
 const api = process.env.REACT_APP_IMAGEURL;
 const API_URL = process.env.REACT_APP_APIURL + "/api/catagories";
@@ -68,6 +69,9 @@ function ProjectView() {
   if (loading) return <></>;
 
   if (error) return <p>Error :(</p>;
+  const dirty =
+    data.posts.data[0].attributes.catagory.data.attributes.Projecttext;
+  const clean = sanitizeHtml(dirty);
 
   //console.log((data.posts.data).length);
 
@@ -93,10 +97,8 @@ function ProjectView() {
           {" "}
           {data.posts.data[0].attributes.catagory.data.attributes.project_name}
         </div>
-        <div className="text">
-          <ReactMarkdown>
-            {data.posts.data[0].attributes.catagory.data.attributes.Projecttext}
-          </ReactMarkdown>
+        <div className="text" dangerouslySetInnerHTML={{ __html: clean }}>
+          {/* {data.posts.data[0].attributes.catagory.data.attributes.Projecttext} */}
         </div>
 
         <div className="p-content">
