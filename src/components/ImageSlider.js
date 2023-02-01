@@ -69,6 +69,7 @@ function ImageSlider() {
   var list = [];
   data.posts.data.map((post2, id3) => {
     list[id3] = post2.id;
+    return 0;
   });
 
   // useEffect(() => {
@@ -108,15 +109,15 @@ function ImageSlider() {
                   <>
                     <div
                       className={
-                        post.id == list[current] &&
-                        image.attributes.url.split(".").pop() == "jpg"
+                        post.id === list[current] &&
+                        image.attributes.url.split(".").pop() === "jpg"
                           ? "slide active"
                           : "slide"
                       }
                       key={id}
                     >
-                      {post.id == list[current] &&
-                        image.attributes.url.split(".").pop() == "jpg" && (
+                      {post.id === list[current] &&
+                        image.attributes.url.split(".").pop() === "jpg" && (
                           <img
                             src={api + image.attributes.url}
                             className="image"
@@ -126,15 +127,15 @@ function ImageSlider() {
                     </div>
                     <div
                       className={
-                        post.id == list[current] &&
-                        image.attributes.url.split(".").pop() != "jpg"
+                        post.id === list[current] &&
+                        image.attributes.url.split(".").pop() !== "jpg"
                           ? "slide active"
                           : "slide"
                       }
                       key={id}
                     >
-                      {post.id == list[current] &&
-                        image.attributes.url.split(".").pop() != "jpg" && (
+                      {post.id === list[current] &&
+                        image.attributes.url.split(".").pop() !== "jpg" && (
                           <video className="video" controls="controls autoplay">
                             <source src={api + image.attributes.url} />
                           </video>

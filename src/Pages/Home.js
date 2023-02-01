@@ -57,7 +57,7 @@ function Home() {
       }
     }, 4000);
     return () => clearInterval(interval);
-  }, [current]);
+  }, [current, images.length]);
 
   return (
     <motion.div

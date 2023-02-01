@@ -1,21 +1,7 @@
-import { gql, useQuery } from "@apollo/client";
 import { motion } from "framer-motion";
-import { React, useEffect, useState } from "react";
+import { React } from "react";
 import { Link } from "react-router-dom";
 import "../Styles/Navbar.css";
-const api = process.env.REACT_APP_APIURL;
-
-const PROJ = gql`
-  query getPosts {
-    catagories {
-      data {
-        attributes {
-          UID
-        }
-      }
-    }
-  }
-`;
 
 function Navbar({ navbarOpen, setNavbarOpen, handleToggle, project }) {
   return (
