@@ -1,6 +1,7 @@
 .projectView {
   margin: 10px;
 }
+<<<<<<< HEAD
 .projectView .p-heading {
   padding: 10px;
   padding-bottom: 20px;
@@ -8,6 +9,15 @@
   text-align: center;
   position: sticky;
   font-size: 1.3em;
+=======
+.projectView .p-heading{
+    padding: 10px;
+    padding-bottom: 20px;
+    text-decoration: underline;
+    text-align: center;
+    position: sticky;
+    font-size: 1.3em;
+>>>>>>> d27b98d00f2dad22ec5bca876a48a2b13453786d
 }
 
 .projectView .text {
@@ -101,6 +111,7 @@
 }
 
 @media (max-width: 600px) {
+<<<<<<< HEAD
   .projectView .text {
     padding: 0;
     text-align: left;
@@ -120,3 +131,27 @@
     margin: 10px;
   }
 }
+=======
+
+    .projectView .text{
+        padding: 0;
+        text-align: left;
+    }
+    .projectView .p-content{
+        margin: 0;
+    }
+    .projects{
+        flex-direction: row;
+        position: relative;
+        flex-wrap: wrap;
+        padding-bottom: 20px;
+        justify-content: center;
+        width: 100%;
+    }
+    .project{
+        margin:10px;
+
+
+    }
+}
+>>>>>>> d27b98d00f2dad22ec5bca876a48a2b13453786d
