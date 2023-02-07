@@ -15,7 +15,7 @@ function Home() {
   const [props, setProps] = useState([]);
   const [current, setCurrent] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [images, setImages] = useState([]);
+  // const [images, setImages] = useState([]);
 
   const raw_data = async () => {
     const response = await fetch(`${api + "/api/homepages?populate=*"}`);
@@ -26,26 +26,25 @@ function Home() {
   useEffect(() => {
     raw_data();
     // setImages(getImages(props));
-    setImages(getImages(props));
-    //cacheImages(images);
-  }, [props]);
+    // setImages(getImages(props));
 
-  const cacheImages = async (urlArr) => {
-    const promises = await urlArr.map((url) => {
-      return new Promise(function (resolve, reject) {
-        const img = new Image();
-        img.src = url;
-        img.onload = resolve();
-        img.onerror = reject();
-      });
-    });
-    await Promise.all(promises);
-    setLoading(false);
-  };
-
-  useEffect(() => {
     //cacheImages(images);
   }, []);
+
+  // const cacheImages = async (urlArr) => {
+  //   const promises = await urlArr.map((url) => {
+  //     return new Promise(function (resolve, reject) {
+  //       const img = new Image();
+  //       img.src = url;
+  //       img.onload = resolve();
+  //       img.onerror = reject();
+  //     });
+  //   });
+  //   await Promise.all(promises);
+  //   setLoading(false);
+  // };
+
+  var images = getImages(props);
 
   useEffect(() => {
     const interval = setInterval(() => {
