@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import ReactMarkdown from "react-markdown";
 import { Link, useParams } from "react-router-dom";
 import sanitizeHtml from "sanitize-html";
 import "../Styles/projectView.css";
@@ -42,14 +41,9 @@ const POSTS = gql`
 `;
 
 function ProjectView() {
-  const [posts, setPosts] = useState([]);
   const [categories, setcategories] = useState([]);
 
   const raw_data = async () => {
-    const response = await fetch(`${API_URL}`);
-    const data = await response.json();
-    setPosts(data.data);
-
     const projects = await fetch(`${API_URL}`);
     const projects_data = await projects.json();
 
@@ -73,6 +67,14 @@ function ProjectView() {
     data.posts.data[0].attributes.catagory.data.attributes.Projecttext;
   const clean = sanitizeHtml(dirty);
 
+  // const current = data.posts.data[0].id;
+  // const index = data.posts.data.indexOf(current - 1);
+  // const newdata = data.posts.data.splice(index, 1);
+
+  // console.log(current);
+  // console.log(data);
+  // console.log(newdata);
+
   //console.log((data.posts.data).length);
 
   return (
@@ -84,47 +86,68 @@ function ProjectView() {
       transition={{ duration: 0.18 }}
     >
       <div className="projects">
-        {categories.map((category, id) => (
-          <div className="project" key={id}>
-            <Link to={"/Projects/" + category.attributes.UID}>
-              {category.attributes.project_name}
-            </Link>
-          </div>
-        ))}
+        {categories.map(
+          (category, id) =>
+            category.attributes.UID !== projectUID && (
+              <div className="project" key={id}>
+                <Link to={"/Projects/" + category.attributes.UID}>
+                  {category.attributes.project_name}
+                </Link>
+              </div>
+            )
+        )}
       </div>
       <div className="p-container">
         <div className="p-heading">
-          {" "}
           {data.posts.data[0].attributes.catagory.data.attributes.project_name}
         </div>
-        <div className="text" dangerouslySetInnerHTML={{ __html: clean }}>
-          {/* {data.posts.data[0].attributes.catagory.data.attributes.Projecttext} */}
-        </div>
+        <div className="text" dangerouslySetInnerHTML={{ __html: clean }}></div>
 
         <div className="p-content">
           {data.posts.data.map((post, id) => (
             <div className="p-post" key={id}>
               {post.attributes.media.data.map((image, id2) => {
-                return (
-                  <div key={id2}>
-                    <Link
-                      to={
-                        "/Projects/view/" +
-                        data.posts.data[0].attributes.catagory.data.id +
-                        "/" +
-                        id
-                      }
-                    >
-                      <img
-                        src={api + image.attributes.url}
-                        alt={image.attributes.formats.small.url}
-                      />{" "}
-                    </Link>
-
-                    <div className="cap">{post.attributes.caption}</div>
-                  </div>
-                );
+                if (image.attributes.url.split(".").pop() === "jpg")
+                  return (
+                    <div key={id2}>
+                      <div className="p-imagecontainer">
+                        <Link
+                          to={
+                            "/Projects/view/" +
+                            data.posts.data[0].attributes.catagory.data.id +
+                            "/" +
+                            id
+                          }
+                        >
+                          <img
+                            src={api + image.attributes.url}
+                            alt={image.attributes.formats.small.url}
+                          />
+                        </Link>
+                      </div>
+                    </div>
+                  );
+                else
+                  return (
+                    <div key={id}>
+                      <div className="imgcontainer" key={id2}>
+                        <Link
+                          to={
+                            "/Projects/view/" +
+                            data.posts.data[0].attributes.catagory.data.id +
+                            "/" +
+                            id
+                          }
+                        >
+                          <video className="video" controls="controls autoplay">
+                            <source src={api + image.attributes.url} />
+                          </video>
+                        </Link>
+                      </div>
+                    </div>
+                  );
               })}
+              <div className="cap">{post.attributes.caption}</div>
             </div>
           ))}
         </div>

@@ -80,10 +80,19 @@ const Gallery = () => {
       <div className="years">
         {years.map((year, id) => (
           <div className="year" key={id}>
-            {" "}
+            {/* {year.attributes.year !== yearid ? ( */}
             <Link to={"/Gallery/" + year.attributes.year}>
-              {year.attributes.year}
+              <div
+                style={
+                  year.attributes.year !== yearid
+                    ? {}
+                    : { "font-weight": "bold" }
+                }
+              >
+                {year.attributes.year}
+              </div>
             </Link>
+            {/* ) } */}
           </div>
         ))}
       </div>

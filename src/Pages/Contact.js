@@ -15,7 +15,7 @@ function Contact() {
       <div className="c-title">Contact</div>
       <div className="c-container">
         <div className="image">
-          <img src={contactImage} />
+          <img src={contactImage} alt={"contactImage"} />
         </div>
         <div className="text-icons">
           <div className="text">

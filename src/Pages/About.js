@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { React, useState } from "react";
+import { React } from "react";
 import aboutImage from "../images/aboutpage.jpg";
 import "../Styles/about.css";
 function About() {

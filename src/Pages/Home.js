@@ -14,39 +14,38 @@ function getImages(data) {
 function Home() {
   const [props, setProps] = useState([]);
   const [current, setCurrent] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [images, setImages] = useState([]);
+
   const raw_data = async () => {
     const response = await fetch(`${api + "/api/homepages?populate=*"}`);
     const data = await response.json();
     setProps(data.data);
-    // console.log(data.data);
   };
 
   useEffect(() => {
     raw_data();
-  }, []);
+    // setImages(getImages(props));
+    setImages(getImages(props));
+    //cacheImages(images);
+  }, [props]);
 
   const cacheImages = async (urlArr) => {
     const promises = await urlArr.map((url) => {
       return new Promise(function (resolve, reject) {
-        // console.log(url);
         const img = new Image();
-        img.src = api + url;
+        img.src = url;
         img.onload = resolve();
         img.onerror = reject();
       });
     });
     await Promise.all(promises);
-
     setLoading(false);
   };
 
-  var images = getImages(props);
-  // console.log(images.length + "length");
-  cacheImages(images);
-  // useEffect(() => {
-  //   cacheImages(images);
-  // }, [images]);
+  useEffect(() => {
+    //cacheImages(images);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -57,7 +56,7 @@ function Home() {
       }
     }, 4000);
     return () => clearInterval(interval);
-  }, [current]);
+  }, [current, images.length]);
 
   return (
     <motion.div
