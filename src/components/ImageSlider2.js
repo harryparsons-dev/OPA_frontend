@@ -9,7 +9,10 @@ const api = process.env.REACT_APP_IMAGEURL;
 
 const POST = gql`
   query getPosts($id: ID!) {
-    posts(filters: { catagory: { id: { eq: $id } } }) {
+    posts(
+      filters: { catagory: { id: { eq: $id } } }
+      pagination: { limit: 100 }
+    ) {
       data {
         id
         attributes {

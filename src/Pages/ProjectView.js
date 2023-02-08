@@ -9,7 +9,10 @@ const API_URL = process.env.REACT_APP_APIURL + "/api/catagories";
 
 const POSTS = gql`
   query getPosts($name: String!) {
-    posts(filters: { catagory: { UID: { eq: $name } } }) {
+    posts(
+      filters: { catagory: { UID: { eq: $name } } }
+      pagination: { limit: 100 }
+    ) {
       data {
         id
         attributes {
@@ -140,7 +143,9 @@ function ProjectView() {
                           }
                         >
                           <video className="video" controls="controls autoplay">
-                            <source src={api + image.attributes.url} />
+                            <source
+                              src={api + image.attributes.url + "#t=0.001"}
+                            />
                           </video>
                         </Link>
                       </div>

@@ -8,7 +8,11 @@ const api = process.env.REACT_APP_APIURL;
 
 const POSTS = gql`
   query getPosts($year: String!) {
-    posts(sort: "year.year:desc", filters: { year: { year: { eq: $year } } }) {
+    posts(
+      sort: "year.year:desc"
+      filters: { year: { year: { eq: $year } } }
+      pagination: { limit: 100 }
+    ) {
       data {
         id
         attributes {
@@ -147,7 +151,11 @@ const Gallery = () => {
                             controls="controls autoplay"
                             onLoadStart={() => checkLoad(parseInt(id))}
                           >
-                            <source src={imagesapi + image.attributes.url} />
+                            <source
+                              src={
+                                imagesapi + image.attributes.url + "#t=0.001"
+                              }
+                            />
                           </video>
                         </Link>
                       </div>
