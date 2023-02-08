@@ -61,10 +61,24 @@ function ImageSlider() {
   if (loading) return <p>Loading...</p>;
 
   if (error) return <p>Error :(</p>;
-
   data.posts.data.map((post2, id3) => (list[id3] = post2.id));
 
+  let count = 0;
+  let arrCount = 0;
+
+  // while (arrCount < data.posts.data.length) {
+  //   if (data.posts.data[arrCount].attributes.media.data.length > 0) {
+  //     list[count] = data.posts.data[arrCount].id;
+  //     arrCount = +1;
+  //     count = +1;
+  //   } else {
+  //     arrCount = +1;
+  //   }
+  // }
+
+  // console.log(data.posts);
   const length = list.length;
+  // console.log(list);
 
   const nextSlide = () => {
     // console.log(current);
@@ -113,22 +127,42 @@ function ImageSlider() {
             <div key={id}>
               {post.attributes.media.data.map((image, id2) => {
                 return (
-                  <div
-                    className={
-                      parseInt(post.id) === parseInt(list[current])
-                        ? "slide active"
-                        : "slide"
-                    }
-                    key={id}
-                  >
-                    {parseInt(post.id) === parseInt(list[current]) && (
-                      <img
-                        src={api + image.attributes.url}
-                        className="image"
-                        alt={image.attributes.formats.large.url}
-                      />
-                    )}
-                  </div>
+                  <>
+                    <div
+                      className={
+                        post.id === list[current] &&
+                        image.attributes.url.split(".").pop() === "jpg"
+                          ? "slide active"
+                          : "slide"
+                      }
+                      key={id}
+                    >
+                      {post.id === list[current] &&
+                        image.attributes.url.split(".").pop() === "jpg" && (
+                          <img
+                            src={api + image.attributes.url}
+                            className="image"
+                            alt={image.attributes.formats.large.url}
+                          />
+                        )}
+                    </div>
+                    <div
+                      className={
+                        post.id === list[current] &&
+                        image.attributes.url.split(".").pop() !== "jpg"
+                          ? "slide active"
+                          : "slide"
+                      }
+                      key={id2}
+                    >
+                      {post.id === list[current] &&
+                        image.attributes.url.split(".").pop() !== "jpg" && (
+                          <video className="video" controls="controls autoplay">
+                            <source src={api + image.attributes.url} />
+                          </video>
+                        )}
+                    </div>
+                  </>
                 );
               })}
             </div>
