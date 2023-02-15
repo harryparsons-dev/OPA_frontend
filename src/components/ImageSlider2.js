@@ -66,9 +66,6 @@ function ImageSlider() {
   if (error) return <p>Error :(</p>;
   data.posts.data.map((post2, id3) => (list[id3] = post2.id));
 
-  let count = 0;
-  let arrCount = 0;
-
   // while (arrCount < data.posts.data.length) {
   //   if (data.posts.data[arrCount].attributes.media.data.length > 0) {
   //     list[count] = data.posts.data[arrCount].id;

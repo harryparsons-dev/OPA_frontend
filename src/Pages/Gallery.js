@@ -56,7 +56,7 @@ const Gallery = () => {
   }, []);
 
   const { yearid } = useParams();
-
+  // const data = [];
   const { loading, error, data } = useQuery(POSTS, {
     variables: { year: yearid },
   });
@@ -64,6 +64,9 @@ const Gallery = () => {
   if (loading) return <></>;
 
   if (error) return <p>Error :( Please refresh page</p>;
+  if (data === null || data.posts === null || data.posts.data.length === 0) {
+    // data.post.data[0].attributes.title = "No posts";
+  }
 
   function checkLoad(index) {
     if (index === data.posts.data.length - 1) {
@@ -88,9 +91,7 @@ const Gallery = () => {
             <Link to={"/Gallery/" + year.attributes.year}>
               <div
                 style={
-                  year.attributes.year !== yearid
-                    ? {}
-                    : { "font-weight": "bold" }
+                  year.attributes.year !== yearid ? {} : { fontWeight: "bold" }
                 }
               >
                 {year.attributes.year}
@@ -100,73 +101,77 @@ const Gallery = () => {
           </div>
         ))}
       </div>
-      <div className="gal-content">
-        <div className="heading">{yearid}</div>
+      {data.posts.data.length === 0 ? (
+        <div className="noPost">No content added yet, come back later!</div>
+      ) : (
+        <div className="gal-content">
+          <div className="heading">{yearid}</div>
 
-        <div className="content-gallery">
-          {data.posts.data.map((post, id) => (
-            <div className="post" key={id}>
-              {post.attributes.media.data.map((image, id2) => {
-                if (image.attributes.url.split(".").pop() === "jpg")
-                  return (
-                    <div key={id}>
-                      <div
-                        className="imgcontainer"
-                        style={loaded ? {} : { display: "none" }}
-                        key={id2}
-                      >
-                        <Link
-                          to={
-                            "/Gallery/" +
-                            data.posts.data[0].attributes.year.data.attributes
-                              .year +
-                            "/view/" +
-                            id
-                          }
+          <div className="content-gallery">
+            {data.posts.data?.map((post, id) => (
+              <div className="post" key={id}>
+                {post.attributes.media.data.map((image, id2) => {
+                  if (image.attributes.url.split(".").pop() === "jpg")
+                    return (
+                      <div key={id}>
+                        <div
+                          className="imgcontainer"
+                          style={loaded ? {} : { display: "none" }}
+                          key={id2}
                         >
-                          <img
-                            src={imagesapi + image.attributes.url}
-                            alt={image.attributes.formats.small.url}
-                            onLoad={() => checkLoad(id)}
-                          />
-                        </Link>
-                      </div>
-                    </div>
-                  );
-                else
-                  return (
-                    <div key={id}>
-                      <div className="imgcontainer" key={id2}>
-                        <Link
-                          to={
-                            "/Gallery/" +
-                            data.posts.data[0].attributes.year.data.attributes
-                              .year +
-                            "/view/" +
-                            id
-                          }
-                        >
-                          <video
-                            className="video"
-                            controls="controls autoplay"
-                            onLoadStart={() => checkLoad(parseInt(id))}
+                          <Link
+                            to={
+                              "/Gallery/" +
+                              data.posts.data[0].attributes.year.data.attributes
+                                .year +
+                              "/view/" +
+                              id
+                            }
                           >
-                            <source
-                              src={
-                                imagesapi + image.attributes.url + "#t=0.001"
-                              }
+                            <img
+                              src={imagesapi + image.attributes.url}
+                              alt={image.attributes.formats.small.url}
+                              onLoad={() => checkLoad(id)}
                             />
-                          </video>
-                        </Link>
+                          </Link>
+                        </div>
                       </div>
-                    </div>
-                  );
-              })}
-              <div className="cap">{post.attributes.caption}</div>
-            </div>
-          ))}
+                    );
+                  else
+                    return (
+                      <div key={id}>
+                        <div className="imgcontainer" key={id2}>
+                          <Link
+                            to={
+                              "/Gallery/" +
+                              data.posts.data[0].attributes.year.data.attributes
+                                .year +
+                              "/view/" +
+                              id
+                            }
+                          >
+                            <video
+                              className="video"
+                              controls="controls autoplay"
+                              onLoadStart={() => checkLoad(parseInt(id))}
+                            >
+                              <source
+                                src={
+                                  imagesapi + image.attributes.url + "#t=0.001"
+                                }
+                              />
+                            </video>
+                          </Link>
+                        </div>
+                      </div>
+                    );
+                })}
+                <div className="cap">{post.attributes.caption}</div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </motion.div>
   );
 };
