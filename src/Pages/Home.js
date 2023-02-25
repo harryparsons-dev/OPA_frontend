@@ -56,7 +56,7 @@ function Home() {
     }, 4000);
     return () => clearInterval(interval);
   }, [current, images.length]);
-
+  if (!props) return <div>Loading...</div>;
   return (
     <motion.div
       initial={{ opacity: 0 }}
