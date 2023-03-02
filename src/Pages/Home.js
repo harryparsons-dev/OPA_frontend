@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import "../Styles/home.css";
 const api = process.env.REACT_APP_APIURL;
-
+const token = process.env.REACT_APP_TOKEN;
 function getImages(data) {
   var images = [];
   data.map(
@@ -18,7 +18,12 @@ function Home() {
   // const [images, setImages] = useState([]);
 
   const raw_data = async () => {
-    const response = await fetch(`${api + "/api/homepages?populate=*"}`);
+    const response = await fetch(`${api}/api/homepages?populate=*`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     setProps(data.data);
   };

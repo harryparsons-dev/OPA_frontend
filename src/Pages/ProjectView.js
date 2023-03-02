@@ -6,6 +6,7 @@ import sanitizeHtml from "sanitize-html";
 import "../Styles/projectView.css";
 const api = process.env.REACT_APP_IMAGEURL;
 const API_URL = process.env.REACT_APP_APIURL + "/api/catagories";
+const token = process.env.REACT_APP_TOKEN;
 
 const POSTS = gql`
   query getPosts($name: String!) {
@@ -47,7 +48,12 @@ function ProjectView() {
   const [categories, setcategories] = useState([]);
 
   const raw_data = async () => {
-    const projects = await fetch(`${API_URL}`);
+    const projects = await fetch(`${API_URL}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const projects_data = await projects.json();
 
     setcategories(projects_data.data);
