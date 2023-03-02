@@ -18,15 +18,10 @@
 
 .projectView .p-post {
   height: 100%;
-  width: 350px;
-  padding: 10px;
+  width: 400px;
   object-fit: contain;
-
   outline-color: gray;
 
-  margin-bottom: 10%;
-  margin-left: 5%;
-  margin-right: 5%;
   border-radius: 5px;
 
   animation: 0.7s ease-in 0s 1 fadeUp;
@@ -36,12 +31,14 @@
 }
 .projectView .p-content {
   display: flex;
+  gap: 20%;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  margin-left: 30px;
   /* padding-top: 300px; */
-  margin: 2% 15% 0 15%;
+  /* margin: 2% 15% 0 15%; */
 }
 
 .p-post img {
