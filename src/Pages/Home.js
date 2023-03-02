@@ -24,8 +24,11 @@ function Home() {
   };
 
   useEffect(() => {
-    raw_data();
-    // setImages(getImages(props));
+    try {
+      raw_data();
+    } catch (e) {
+      console.error(e);
+    } // setImages(getImages(props));
     // setImages(getImages(props));
 
     //cacheImages(images);
@@ -43,9 +46,9 @@ function Home() {
   //   await Promise.all(promises);
   //   setLoading(false);
   // };
-
-  var images = getImages(props);
-
+  if (props) {
+    var images = getImages(props);
+  }
   useEffect(() => {
     const interval = setInterval(() => {
       if (current === images.length - 1) {
@@ -56,6 +59,7 @@ function Home() {
     }, 4000);
     return () => clearInterval(interval);
   }, [current, images.length]);
+
   if (!props) return <div>Loading...</div>;
   return (
     <motion.div
