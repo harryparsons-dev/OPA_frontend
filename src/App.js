@@ -35,7 +35,7 @@ const App = () => {
       console.error(e);
     }
   }, []);
-
+  if (!proj) return <div>Loading...</div>;
   return (
     <div className="App">
       <div className="content">

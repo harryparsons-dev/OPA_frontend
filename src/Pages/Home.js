@@ -3,19 +3,19 @@ import React, { useEffect, useState } from "react";
 import "../Styles/home.css";
 const api = process.env.REACT_APP_APIURL;
 const token = process.env.REACT_APP_TOKEN;
-function getImages(data) {
-  var images = [];
-  data.map(
-    (props, id) => (images[id] = props.attributes.image.data.attributes.url)
-  );
-  return images;
-}
 
 function Home() {
   const [props, setProps] = useState([]);
   const [current, setCurrent] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   // const [images, setImages] = useState([]);
+  function getImages(data) {
+    var images = [];
+    data.map(
+      (props, id) => (images[id] = props.attributes.image.data.attributes.url)
+    );
+    return images;
+  }
 
   const raw_data = async () => {
     const response = await fetch(`${api}/api/homepages?populate=*`, {
@@ -31,28 +31,17 @@ function Home() {
   useEffect(() => {
     try {
       raw_data();
+
+      // setProps(data.data);
+      setLoading(false);
     } catch (e) {
       console.error(e);
-    } // setImages(getImages(props));
-    // setImages(getImages(props));
-
-    //cacheImages(images);
+    }
   }, []);
 
-  // const cacheImages = async (urlArr) => {
-  //   const promises = await urlArr.map((url) => {
-  //     return new Promise(function (resolve, reject) {
-  //       const img = new Image();
-  //       img.src = url;
-  //       img.onload = resolve();
-  //       img.onerror = reject();
-  //     });
-  //   });
-  //   await Promise.all(promises);
-  //   setLoading(false);
-  // };
+  var images = [];
   if (props) {
-    var images = getImages(props);
+    images = getImages(props);
   }
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,9 +52,9 @@ function Home() {
       }
     }, 4000);
     return () => clearInterval(interval);
-  }, [current, images.length]);
+  }, []);
 
-  if (!props) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
   return (
     <motion.div
       initial={{ opacity: 0 }}
