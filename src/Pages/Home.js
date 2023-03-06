@@ -52,7 +52,7 @@ function Home() {
       }
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [current, images.length]);
 
   if (loading) return <div>Loading...</div>;
   return (
