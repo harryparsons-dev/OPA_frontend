@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from "react";
-
 import { FaInstagram } from "react-icons/fa";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
@@ -8,24 +7,25 @@ const api = process.env.REACT_APP_APIURL;
 
 const App = () => {
   const [change, setChange] = useState("false");
-
+  const [navbarOpen, setNavbarOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [proj, setProj] = useState();
   const handleToggle = () => {
     setChange(!change);
   };
 
-  const [navbarOpen, setNavbarOpen] = useState(false);
-
-  const [proj, setProj] = useState();
-
   const raw_data = async () => {
     const response = await fetch(`${api + "/api/catagories"}`);
     const data = await response.json();
+    //  console.log(data);
+    //setPosts(data.data);
     setProj(data.data[0].attributes.UID);
   };
 
   useEffect(() => {
     raw_data();
   }, []);
+  //console.log(posts[0].attributes.UID);
 
   return (
     <div className="App">

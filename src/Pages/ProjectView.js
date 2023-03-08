@@ -74,8 +74,9 @@ function ProjectView() {
   let clean = "";
   if (data.posts.data.length > 0) {
     dirty = data.posts.data[0].attributes.catagory.data.attributes.Projecttext;
+    clean = sanitizeHtml(dirty);
   }
-  clean = sanitizeHtml(dirty);
+
   // const current = data.posts.data[0].id;
   // const index = data.posts.data.indexOf(current - 1);
   // const newdata = data.posts.data.splice(index, 1);
