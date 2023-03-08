@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import "../Styles/Gallery.css";
 const imagesapi = process.env.REACT_APP_IMAGEURL;
 const api = process.env.REACT_APP_APIURL;
+const token = process.env.REACT_APP_TOKEN;
 
 const POSTS = gql`
   query getPosts($year: String!) {
@@ -47,7 +48,13 @@ const Gallery = () => {
   const [loaded, setLoaded] = useState(false);
 
   const raw_data = async () => {
-    const resYear = await fetch(`${api + "/api/years?populate=*"}`);
+    const resYear = await fetch(`${api}/api/years?populate=*`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
     const dataYear = await resYear.json();
     setsYears(dataYear.data);
   };
@@ -59,6 +66,7 @@ const Gallery = () => {
   // const data = [];
   const { loading, error, data } = useQuery(POSTS, {
     variables: { year: yearid },
+    Authorization: `Bearer ${token}`,
   });
 
   if (loading) return <></>;

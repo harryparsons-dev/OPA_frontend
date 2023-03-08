@@ -2,50 +2,47 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import "../Styles/home.css";
 const api = process.env.REACT_APP_APIURL;
-
-function getImages(data) {
-  var images = [];
-  data.map(
-    (props, id) => (images[id] = props.attributes.image.data.attributes.url)
-  );
-  return images;
-}
+const token = process.env.REACT_APP_TOKEN;
 
 function Home() {
   const [props, setProps] = useState([]);
   const [current, setCurrent] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   // const [images, setImages] = useState([]);
+  function getImages(data) {
+    var images = [];
+    data.map(
+      (props, id) => (images[id] = props.attributes.image.data.attributes.url)
+    );
+    return images;
+  }
 
   const raw_data = async () => {
-    const response = await fetch(`${api + "/api/homepages?populate=*"}`);
+    const response = await fetch(`${api}/api/homepages?populate=*`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     setProps(data.data);
   };
 
   useEffect(() => {
-    raw_data();
-    // setImages(getImages(props));
-    // setImages(getImages(props));
+    try {
+      raw_data();
 
-    //cacheImages(images);
+      // setProps(data.data);
+      setLoading(false);
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
 
-  // const cacheImages = async (urlArr) => {
-  //   const promises = await urlArr.map((url) => {
-  //     return new Promise(function (resolve, reject) {
-  //       const img = new Image();
-  //       img.src = url;
-  //       img.onload = resolve();
-  //       img.onerror = reject();
-  //     });
-  //   });
-  //   await Promise.all(promises);
-  //   setLoading(false);
-  // };
-
-  var images = getImages(props);
-
+  var images = [];
+  if (props) {
+    images = getImages(props);
+  }
   useEffect(() => {
     const interval = setInterval(() => {
       if (current === images.length - 1) {
@@ -57,6 +54,7 @@ function Home() {
     return () => clearInterval(interval);
   }, [current, images.length]);
 
+  if (loading) return <div>Loading...</div>;
   return (
     <motion.div
       initial={{ opacity: 0 }}

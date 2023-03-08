@@ -4,7 +4,7 @@ import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import "./Styles/App.css";
 const api = process.env.REACT_APP_APIURL;
-
+const token = process.env.REACT_APP_TOKEN;
 const App = () => {
   const [change, setChange] = useState("false");
   const [navbarOpen, setNavbarOpen] = useState(false);
@@ -15,7 +15,12 @@ const App = () => {
   };
 
   const raw_data = async () => {
-    const response = await fetch(`${api + "/api/catagories"}`);
+    const response = await fetch(`${api}/api/catagories`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     //  console.log(data);
     //setPosts(data.data);
@@ -23,10 +28,13 @@ const App = () => {
   };
 
   useEffect(() => {
-    raw_data();
+    try {
+      raw_data();
+    } catch (e) {
+      console.error(e);
+    }
   }, []);
-  //console.log(posts[0].attributes.UID);
-
+  if (!proj) return <div>Loading...</div>;
   return (
     <div className="App">
       <div className="content">
