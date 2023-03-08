@@ -25,7 +25,7 @@
   flex-direction: column;
 
   float: left;
-  z-index: 20;
+  z-index: 19;
   position: absolute;
   margin-left: 20px;
   margin-top: 20px;
@@ -144,6 +144,7 @@
     padding: 0;
     padding-top: 30px;
     padding-bottom: 50px;
+    width: 300px;
     -ms-transform: translateY(0);
     transform: translateY(0);
   }
