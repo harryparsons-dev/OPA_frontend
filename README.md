@@ -1,5 +1,5 @@
 # Olivia Parsons Art Web Application - www.oliviaparsons.art
----
+
 
 Olivia Parsons Art is a web application built on the React JS framework
 The backend for this app (not inlcuded in this repo) is Strapi, which allowed the artist to easily add their own content, a must have for a project like this.
@@ -15,7 +15,7 @@ The app allows user to view and learn more about the artist
 - Contact: Displays the artists email and instagram account
 
 ## Installation:
----
+
 
 To run the Olivia Parsons Art web application, follow these steps:
 
@@ -26,7 +26,7 @@ To run the Olivia Parsons Art web application, follow these steps:
 - Open a browser window and navigate to `http://localhost:3000` to view the web application
 
 ## Dependencies
----
+
 
 The web application was built with the following dependencies:
 
@@ -38,8 +38,9 @@ The web application was built with the following dependencies:
 - React Markdown
 
 ## Deployment
----
+
 
 The frontend is hosted for free on Netlify
+
 The backend is hosted on Railway for free also
 
