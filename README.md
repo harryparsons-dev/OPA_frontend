@@ -6,7 +6,7 @@ The backend for this app (not inlcuded in this repo) is Strapi, which allowed th
 The app allows user to view and learn more about the artist
 
 ## Features 
----
+
 
 - Homepage: A simple modern deisgn, cycles through images from the artist and allows user to focus on the artwork
 - Gallery: Displays all of the artwork on the site, the art is split up by years.
