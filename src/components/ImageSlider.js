@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa";
+
 import { useNavigate, useParams } from "react-router-dom";
 import "../Styles/ImageSlider.css";
 const api = process.env.REACT_APP_IMAGEURL;
@@ -106,11 +107,11 @@ function ImageSlider() {
         <FaGreaterThan className="right-arrow" onClick={nextSlide} />
 
         <div className="i-content">
-          {data.posts.data.map((post, id) => (
-            <div key={id}>
-              {post.attributes.media.data.map((image, id2) => {
+          {data.posts.data.map((post) => (
+            <div key={post.id}>
+              {post.attributes.media.data.map((image) => {
                 return (
-                  <>
+                  <div key={`media-${image.id}`}>
                     <div
                       className={
                         post.id === list[current] &&
@@ -118,7 +119,6 @@ function ImageSlider() {
                           ? "slide active"
                           : "slide"
                       }
-                      key={id}
                     >
                       {post.id === list[current] &&
                         image.attributes.url.split(".").pop() === "jpg" && (
@@ -136,7 +136,6 @@ function ImageSlider() {
                           ? "slide active"
                           : "slide"
                       }
-                      key={id}
                     >
                       {post.id === list[current] &&
                         image.attributes.url.split(".").pop() !== "jpg" && (
@@ -145,16 +144,8 @@ function ImageSlider() {
                           </video>
                         )}
                     </div>
-                  </>
+                  </div>
                 );
-
-                // <div>
-                //     <div className={parseInt(post.id) === parseInt(list[current]) ? 'slide active' : 'slide'} key={id}>
-                //     {parseInt(post.id) === parseInt(list[current] ) &&(
-                //      <video className="video" controls="controls autoplay">
-                //           <source src={imagesapi + image.attributes.url}/>
-                //           </video>)}
-                // </div>
               })}
             </div>
           ))}

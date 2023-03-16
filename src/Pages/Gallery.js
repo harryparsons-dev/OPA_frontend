@@ -57,7 +57,20 @@ const Gallery = () => {
 
     const dataYear = await resYear.json();
     setsYears(dataYear.data);
+    handleScrollPosition();
   };
+
+  const handleScrollPosition = () => {
+    const scrollPos = sessionStorage.getItem("scrollPosition");
+    if (scrollPos) {
+      window.scrollTo(0, parseInt(scrollPos));
+      sessionStorage.removeItem("scrollPosition");
+    }
+  };
+  const handleClick = (e) => {
+    sessionStorage.setItem("scrollPosition", window.scrollY);
+  };
+
   useEffect(() => {
     raw_data();
   }, []);
@@ -88,7 +101,7 @@ const Gallery = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.18 }}
+      transition={{ duration: 0.15 }}
     >
       {/* <div className="heading">{yearid}</div> */}
 
@@ -116,16 +129,15 @@ const Gallery = () => {
           <div className="heading">{yearid}</div>
 
           <div className="content-gallery">
-            {data.posts.data?.map((post, id) => (
-              <div className="post" key={id}>
+            {data.posts.data?.map((post, ID) => (
+              <div className="post" key={post.id}>
                 {post.attributes.media.data.map((image, id2) => {
                   if (image.attributes.url.split(".").pop() === "jpg")
                     return (
-                      <div key={id}>
+                      <div key={`jpg-${image.id}`}>
                         <div
                           className="imgcontainer"
                           style={loaded ? {} : { display: "none" }}
-                          key={id2}
                         >
                           <Link
                             to={
@@ -133,13 +145,14 @@ const Gallery = () => {
                               data.posts.data[0].attributes.year.data.attributes
                                 .year +
                               "/view/" +
-                              id
+                              ID
                             }
+                            onClick={() => handleClick()}
                           >
                             <img
                               src={imagesapi + image.attributes.url}
                               alt={image.attributes.formats.small.url}
-                              onLoad={() => checkLoad(id)}
+                              onLoad={() => checkLoad(ID)}
                             />
                           </Link>
                         </div>
@@ -147,21 +160,22 @@ const Gallery = () => {
                     );
                   else
                     return (
-                      <div key={id}>
-                        <div className="imgcontainer" key={id2}>
+                      <div key={`video-${image.id}`}>
+                        <div className="imgcontainer">
                           <Link
                             to={
                               "/Gallery/" +
                               data.posts.data[0].attributes.year.data.attributes
                                 .year +
                               "/view/" +
-                              id
+                              ID
                             }
+                            onClick={() => handleClick()}
                           >
                             <video
                               className="video"
                               controls="controls autoplay"
-                              onLoadStart={() => checkLoad(parseInt(id))}
+                              onLoadStart={() => checkLoad(parseInt(ID))}
                             >
                               <source
                                 src={

@@ -54,9 +54,23 @@ function ProjectView() {
         Authorization: `Bearer ${token}`,
       },
     });
-    const projects_data = await projects.json();
 
+    const projects_data = await projects.json();
     setcategories(projects_data.data);
+    handleScrollPosition();
+  };
+
+  const handleScrollPosition = () => {
+    const scrollPos = sessionStorage.getItem("scrollPosition_projects");
+    console.log(scrollPos);
+    if (scrollPos) {
+      // window.scrollTo(0, parseInt(scrollPos));
+      document.App.scrollTo(0, parseInt(scrollPos));
+      sessionStorage.removeItem("scrollPosition_projects");
+    }
+  };
+  const handleClick = (e) => {
+    sessionStorage.setItem("scrollPosition_projects", window.scrollY);
   };
 
   useEffect(() => {
@@ -65,19 +79,14 @@ function ProjectView() {
 
   let { projectUID } = useParams();
 
-  // let _projectID = 0;
-
   const { loading, error, data } = useQuery(POSTS, {
     variables: { name: projectUID },
   });
-  console.log(data);
+
   if (loading) return <></>;
 
   if (error) return <p>Error :(</p>;
 
-  // if (data === null || data.posts === null || data.posts.data.length === 0) {
-  //   return <div className="noPost">No content added yet, come back later!</div>;
-  // }
   let dirty = "";
   let clean = "";
   if (data.posts.data.length > 0) {
@@ -85,23 +94,13 @@ function ProjectView() {
     clean = sanitizeHtml(dirty);
   }
 
-  // const current = data.posts.data[0].id;
-  // const index = data.posts.data.indexOf(current - 1);
-  // const newdata = data.posts.data.splice(index, 1);
-
-  // console.log(current);
-  // console.log(data);
-  // console.log(newdata);
-
-  //console.log((data.posts.data).length);
-
   return (
     <motion.div
       className="projectView"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.18 }}
+      transition={{ duration: 0.2 }}
     >
       <div className="projects">
         {categories.map((category, id) => (
@@ -137,7 +136,7 @@ function ProjectView() {
 
           <div className="p-content">
             {data.posts.data.map((post, id) => (
-              <div className="p-post" key={id}>
+              <div className="p-post" key={post.id}>
                 {post.attributes.media.data.map((image, id2) => {
                   if (image.attributes.url.split(".").pop() === "jpg")
                     return (
@@ -150,6 +149,7 @@ function ProjectView() {
                               "/" +
                               id
                             }
+                            onClick={() => handleClick()}
                           >
                             <img
                               src={api + image.attributes.url}
@@ -170,6 +170,7 @@ function ProjectView() {
                               "/" +
                               id
                             }
+                            onClick={() => handleClick()}
                           >
                             <video
                               className="video"

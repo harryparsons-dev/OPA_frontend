@@ -12,23 +12,25 @@ import ImageSlider2 from "./ImageSlider2";
 function AnimatedRoutes() {
   const location = useLocation();
   return (
-    <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
-        <Route exact path="*" element={<Home />}></Route>
-        <Route path="/Gallery/:yearid" element={<Gallery />}></Route>
-        <Route path="/Projects/:projectUID" element={<ProjectView />}></Route>
-        <Route
-          path="/Projects/view/:projectID/:id"
-          element={<ImageSlider2 />}
-        ></Route>
-        <Route
-          path="/Gallery/:yearid/view/:id"
-          element={<ImageSlider />}
-        ></Route>
-        <Route path="/About" element={<About />}></Route>
-        <Route path="/Contact" element={<Contact />}></Route>
-      </Routes>
-    </AnimatePresence>
+    <>
+      <AnimatePresence>
+        <Routes location={location} key={location.pathname}>
+          <Route exact path="*" element={<Home />}></Route>
+          <Route path="/Gallery/:yearid" element={<Gallery />}></Route>
+          <Route path="/Projects/:projectUID" element={<ProjectView />}></Route>
+          <Route
+            path="/Projects/view/:projectID/:id"
+            element={<ImageSlider2 />}
+          ></Route>
+          <Route
+            path="/Gallery/:yearid/view/:id"
+            element={<ImageSlider />}
+          ></Route>
+          <Route path="/About" element={<About />}></Route>
+          <Route path="/Contact" element={<Contact />}></Route>
+        </Routes>
+      </AnimatePresence>
+    </>
   );
 }
 

@@ -6,7 +6,6 @@ import { FaGreaterThan, FaLessThan } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
 import "../Styles/ImageSlider.css";
 const api = process.env.REACT_APP_IMAGEURL;
-
 const POST = gql`
   query getPosts($id: ID!) {
     posts(
@@ -67,29 +66,12 @@ function ImageSlider() {
   if (error) return <p>Error :(</p>;
   data.posts.data.map((post2, id3) => (list[id3] = post2.id));
 
-  // while (arrCount < data.posts.data.length) {
-  //   if (data.posts.data[arrCount].attributes.media.data.length > 0) {
-  //     list[count] = data.posts.data[arrCount].id;
-  //     arrCount = +1;
-  //     count = +1;
-  //   } else {
-  //     arrCount = +1;
-  //   }
-  // }
-
-  // console.log(data.posts);
   const length = list.length;
-  console.log(list);
-  console.log("current: " + list[current]);
 
   const nextSlide = () => {
-    // console.log(current);
     if (current === parseInt(length - 1)) {
-      // console.log("Setting current to index 0");
       setCurrent(0);
     } else {
-      // console.log("Setting current to index +1: " + parseInt(current + 1));
-
       setCurrent(parseInt(current + 1));
     }
   };
@@ -99,12 +81,7 @@ function ImageSlider() {
     } else {
       setCurrent(parseInt(current - 1));
     }
-
-    //setCurrent((current) === 0 ? list[length - 1] : list[(current) - 1])
   };
-  // console.log(list);
-  // console.log(current);
-  //console.log(data.posts.data);
 
   if (!Array.isArray(data.posts.data) || length <= 0) {
     return null;
@@ -126,10 +103,10 @@ function ImageSlider() {
 
         <div className="i-content">
           {data.posts.data.map((post, id) => (
-            <div key={id}>
+            <div className="i-posts" key={post.id}>
               {post.attributes.media.data.map((image, id2) => {
                 return (
-                  <>
+                  <div key={`media-${image.id}`}>
                     <div
                       className={
                         post.id === list[current] &&
@@ -137,7 +114,6 @@ function ImageSlider() {
                           ? "slide active"
                           : "slide"
                       }
-                      key={id}
                     >
                       {post.id === list[current] &&
                         image.attributes.url.split(".").pop() === "jpg" && (
@@ -155,7 +131,6 @@ function ImageSlider() {
                           ? "slide active"
                           : "slide"
                       }
-                      key={id2}
                     >
                       {post.id === list[current] &&
                         image.attributes.url.split(".").pop() !== "jpg" && (
@@ -164,7 +139,7 @@ function ImageSlider() {
                           </video>
                         )}
                     </div>
-                  </>
+                  </div>
                 );
               })}
             </div>

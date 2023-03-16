@@ -12,6 +12,9 @@ const App = () => {
   const [proj, setProj] = useState();
   const handleToggle = () => {
     setChange(!change);
+    if (change) {
+      handleClick();
+    }
   };
 
   const raw_data = async () => {
@@ -22,9 +25,18 @@ const App = () => {
       },
     });
     const data = await response.json();
-    //  console.log(data);
-    //setPosts(data.data);
     setProj(data.data[0].attributes.UID);
+    handleScrollPosition();
+  };
+  const handleScrollPosition = () => {
+    const scrollPos = sessionStorage.getItem("scrollPosition");
+    if (scrollPos) {
+      window.scrollTo(0, parseInt(scrollPos));
+      sessionStorage.removeItem("scrollPosition");
+    }
+  };
+  const handleClick = (e) => {
+    sessionStorage.setItem("scrollPosition", window.scrollY);
   };
 
   useEffect(() => {
@@ -60,18 +72,17 @@ const App = () => {
             <FaInstagram className="instagram" />{" "}
           </a>
         </div>
-        <div className="nav">
-          {navbarOpen ? (
-            <Navbar
-              navbarOpen={navbarOpen}
-              setNavbarOpen={setNavbarOpen}
-              handleToggle={handleToggle}
-              project={proj}
-            />
-          ) : null}
-        </div>
 
-        {!navbarOpen ? <Main /> : null}
+        {!navbarOpen ? (
+          <Main />
+        ) : (
+          <Navbar
+            navbarOpen={navbarOpen}
+            setNavbarOpen={setNavbarOpen}
+            handleToggle={handleToggle}
+            project={proj}
+          />
+        )}
       </div>
     </div>
   );
