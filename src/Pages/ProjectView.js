@@ -64,11 +64,13 @@ function ProjectView() {
   }, []);
 
   let { projectUID } = useParams();
+
   // let _projectID = 0;
 
   const { loading, error, data } = useQuery(POSTS, {
     variables: { name: projectUID },
   });
+  console.log(data);
   if (loading) return <></>;
 
   if (error) return <p>Error :(</p>;
@@ -139,7 +141,7 @@ function ProjectView() {
                 {post.attributes.media.data.map((image, id2) => {
                   if (image.attributes.url.split(".").pop() === "jpg")
                     return (
-                      <div key={id2}>
+                      <div key={id}>
                         <div className="p-imagecontainer">
                           <Link
                             to={
@@ -160,7 +162,7 @@ function ProjectView() {
                   else
                     return (
                       <div key={id}>
-                        <div className="imgcontainer" key={id2}>
+                        <div className="imgcontainer">
                           <Link
                             to={
                               "/Projects/view/" +

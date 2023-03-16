@@ -11,6 +11,7 @@ const POST = gql`
   query getPosts($id: ID!) {
     posts(
       filters: { catagory: { id: { eq: $id } } }
+      sort: "id:ASC"
       pagination: { limit: 100 }
     ) {
       data {
@@ -78,7 +79,8 @@ function ImageSlider() {
 
   // console.log(data.posts);
   const length = list.length;
-  // console.log(list);
+  console.log(list);
+  console.log("current: " + list[current]);
 
   const nextSlide = () => {
     // console.log(current);
