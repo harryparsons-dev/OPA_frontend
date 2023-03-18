@@ -57,15 +57,13 @@ function ProjectView() {
 
     const projects_data = await projects.json();
     setcategories(projects_data.data);
-    handleScrollPosition();
   };
 
   const handleScrollPosition = () => {
     const scrollPos = sessionStorage.getItem("scrollPosition_projects");
     console.log(scrollPos);
     if (scrollPos) {
-      // window.scrollTo(0, parseInt(scrollPos));
-      document.App.scrollTo(0, parseInt(scrollPos));
+      window.scrollTo(0, parseInt(scrollPos));
       sessionStorage.removeItem("scrollPosition_projects");
     }
   };
@@ -74,6 +72,7 @@ function ProjectView() {
   };
 
   useEffect(() => {
+    handleScrollPosition();
     raw_data();
   }, []);
 

@@ -3,13 +3,11 @@ import { FaInstagram } from "react-icons/fa";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import "./Styles/App.css";
-const api = process.env.REACT_APP_APIURL;
-const token = process.env.REACT_APP_TOKEN;
+
 const App = () => {
   const [change, setChange] = useState("false");
   const [navbarOpen, setNavbarOpen] = useState(false);
-  const [posts, setPosts] = useState([]);
-  const [proj, setProj] = useState();
+
   const handleToggle = () => {
     setChange(!change);
     if (change) {
@@ -17,17 +15,6 @@ const App = () => {
     }
   };
 
-  const raw_data = async () => {
-    const response = await fetch(`${api}/api/catagories`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    setProj(data.data[0].attributes.UID);
-    handleScrollPosition();
-  };
   const handleScrollPosition = () => {
     const scrollPos = sessionStorage.getItem("scrollPosition");
     if (scrollPos) {
@@ -39,14 +26,6 @@ const App = () => {
     sessionStorage.setItem("scrollPosition", window.scrollY);
   };
 
-  useEffect(() => {
-    try {
-      raw_data();
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
-  if (!proj) return <div>Loading...</div>;
   return (
     <div className="App">
       <div className="content">
@@ -80,7 +59,6 @@ const App = () => {
             navbarOpen={navbarOpen}
             setNavbarOpen={setNavbarOpen}
             handleToggle={handleToggle}
-            project={proj}
           />
         )}
       </div>
