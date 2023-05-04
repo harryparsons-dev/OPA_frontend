@@ -59,7 +59,8 @@
   flex-wrap: wrap;
   position: relative;
   align-content: center;
-  width: 100%;
+  margin-left: 10%;
+  width: 80%;
   gap: 20%;
 
   align-items: center;
@@ -136,6 +137,7 @@
     padding-bottom: 20px;
   }
   .gal-content {
+    width: 100%;
   }
 
   /* Removes the margin between the boxes */

@@ -1,14 +1,32 @@
 import { motion } from "framer-motion";
-import { React, useState } from "react";
-import contactImage from "../images/contactpage.jpg";
+import { React, useEffect, useState } from "react";
 import "../Styles/contact.css";
+import contactImage from "../images/contactpage.jpg";
 
 function Contact() {
   const [isLoaded, setLoaded] = useState(false);
-
+  const [dots, setDots] = useState("");
   const handleImageLoad = () => {
     setLoaded(true);
   };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots((prev) => {
+        switch (prev) {
+          case ".":
+            return "..";
+          case "..":
+            return "...";
+          case "...":
+            return ".";
+          default:
+            return ".";
+        }
+      });
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <motion.div
@@ -18,7 +36,7 @@ function Contact() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
     >
-      {!isLoaded && <div>Loading...</div>}
+      {!isLoaded && <p style={{ textAlign: "center" }}>Loading{dots}</p>}
       <div className="c-title">Contact</div>
       <div className="c-container">
         <div className="image">

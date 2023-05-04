@@ -1,45 +1,64 @@
-@keyframes fade{
-    0%{
-
-        opacity: 0;
-    }
-    100%{
-
-        opacity: 100;
-    }
-
-
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
 }
 
-
-
-.home-slider{
-
-}
-.h-image-container{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.home-slider {
 }
 
-.h-image{
+/* .h-image-container img {
+  align-items: center;
+  width: auto;
+  max-width: 85vw;
+  max-height: 85vh;
+  max-width: 100%;
+  height: auto;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+  transition: fadein 0.5s ease-in-out;
+} */
 
-    align-items: center;
-    width: auto;
-    max-width: 85vw;
-    max-height: 85vh;
-    animation: fade 3s ease 0s  alternate;
+/* .h-image-container img.loaded {
+  opacity: 1;
+} */
+
+.h-image-container {
+  position: relative;
+  position: relative;
+  height: 90vh;
+}
+.h-image-container img {
+  max-width: 85vw;
+  max-height: 85vh;
+  object-fit: contain;
 }
 
+.h-image-container > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* transform: translateX(-50%); */
+  opacity: 0;
+  /* transform: translateY(-50%, 50%); */
+  transition: opacity 0.7s ease-in-out;
+}
 
-
+.h-image-container > div.visible {
+  opacity: 1;
+}
 
 @media (max-width: 600px) {
-    .home-slider{
-        height: 75vh;
-        overflow: hidden;
-
-    }
+  .home-slider {
+    /* overflow: hidden; */
+  }
+  .h-image-container > div {
+    transform: translate(-50%, -90%);
+  }
+  .h-image-container > div.visible {
+  }
 }

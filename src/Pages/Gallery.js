@@ -46,6 +46,7 @@ const POSTS = gql`
 const Gallery = () => {
   const [years, setsYears] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [dots, setDots] = useState(".");
 
   const raw_data = async () => {
     const resYear = await fetch(`${api}/api/years?populate=*`, {
@@ -73,6 +74,22 @@ const Gallery = () => {
 
   useEffect(() => {
     raw_data();
+    const interval = setInterval(() => {
+      setDots((prev) => {
+        switch (prev) {
+          case ".":
+            return "..";
+          case "..":
+            return "...";
+          case "...":
+            return ".";
+          default:
+            return ".";
+        }
+      });
+    }, 500);
+
+    return () => clearInterval(interval);
   }, []);
 
   const { yearid } = useParams();
@@ -82,12 +99,12 @@ const Gallery = () => {
     Authorization: `Bearer ${token}`,
   });
 
-  if (loading) return <></>;
+  if (loading) return <p style={{ textAlign: "center" }}>Loading{dots}</p>;
 
   if (error) return <p>Error :( Please refresh page</p>;
-  if (data === null || data.posts === null || data.posts.data.length === 0) {
-    // data.post.data[0].attributes.title = "No posts";
-  }
+  // if (data === null || data.posts === null || data.posts.data.length === 0) {
+  //   // data.post.data[0].attributes.title = "No posts";
+  // }
 
   function checkLoad(index) {
     if (index === data.posts.data.length - 1) {

@@ -46,6 +46,7 @@ const POSTS = gql`
 
 function ProjectView() {
   const [categories, setcategories] = useState([]);
+  const [dots, setDots] = useState("");
 
   const raw_data = async () => {
     const projects = await fetch(`${API_URL}`, {
@@ -74,6 +75,22 @@ function ProjectView() {
   useEffect(() => {
     handleScrollPosition();
     raw_data();
+    const interval = setInterval(() => {
+      setDots((prev) => {
+        switch (prev) {
+          case ".":
+            return "..";
+          case "..":
+            return "...";
+          case "...":
+            return ".";
+          default:
+            return ".";
+        }
+      });
+    }, 500);
+
+    return () => clearInterval(interval);
   }, []);
 
   let { projectUID } = useParams();
@@ -82,7 +99,7 @@ function ProjectView() {
     variables: { name: projectUID },
   });
 
-  if (loading) return <></>;
+  if (loading) return <p style={{ textAlign: "center" }}>Loading{dots}</p>;
 
   if (error) return <p>Error :(</p>;
 
