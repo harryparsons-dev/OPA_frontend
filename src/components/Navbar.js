@@ -63,7 +63,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
             handleToggle();
           }}
         >
-          Projects & Shows
+          Projects
         </Link>
       </li>
       <li>
