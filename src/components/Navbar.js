@@ -8,7 +8,7 @@ const token = process.env.REACT_APP_TOKEN;
 function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
   const [proj, setProj] = useState();
   const raw_data = async () => {
-    const response = await fetch(`${api}/api/catagories`, {
+    const response = await fetch(`${api}/api/catagories?sort=rank:asc`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

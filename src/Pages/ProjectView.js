@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import sanitizeHtml from "sanitize-html";
 import "../Styles/projectView.css";
 const api = process.env.REACT_APP_IMAGEURL;
-const API_URL = process.env.REACT_APP_APIURL + "/api/catagories";
+const API_URL = process.env.REACT_APP_APIURL + "/api/catagories?sort=rank:asc";
 const token = process.env.REACT_APP_TOKEN;
 
 const POSTS = gql`
@@ -99,7 +99,12 @@ function ProjectView() {
     variables: { name: projectUID },
   });
 
-  if (loading) return <p style={{ textAlign: "center" }}>Loading{dots}</p>;
+  if (loading)
+    return (
+      <div className="loading" style={{ textAlign: "center" }}>
+        Loading{dots}
+      </div>
+    );
 
   if (error) return <p>Error :(</p>;
 

@@ -1,14 +1,33 @@
 import { motion } from "framer-motion";
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import "../Styles/about.css";
 import aboutImage from "../images/aboutpage.jpg";
 function About() {
   const [isLoaded, setLoaded] = useState(false);
+  const [dots, setDots] = useState("");
 
   const handleImageLoad = () => {
     setLoaded(true);
   };
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDots((prev) => {
+        switch (prev) {
+          case ".":
+            return "..";
+          case "..":
+            return "...";
+          case "...":
+            return ".";
+          default:
+            return ".";
+        }
+      });
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <motion.div
@@ -17,7 +36,7 @@ function About() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
     >
-      {!isLoaded && <div>Loading...</div>}
+      {!isLoaded && <div className="loading">Loading...</div>}
 
       <div className="a-title">About</div>
 
@@ -32,7 +51,9 @@ function About() {
         </div>
         {isLoaded && (
           <div className="text">
-            <p>Artist Practice:</p>
+            <b>
+              <p>Artist Practice:</p>
+            </b>
             <br />
             <p>
               <i>
@@ -73,7 +94,9 @@ function About() {
                 <br /> <br />
               </i>
             </p>
-            <p>Bio:</p>
+            <b>
+              <p>Bio:</p>
+            </b>
             <br />
             <p>
               Olivia grew up in rural Devon and moved to London to take up her
@@ -85,7 +108,9 @@ function About() {
               practice from her base in Crystal Palace, south-east London.{" "}
             </p>
             <br />
-            <p>Exhibitions:</p>
+            <b>
+              <p>Exhibitions:</p>
+            </b>
             <br />
             <ul>
               <li>2022 Nunhead Art Exhibition, London. (group)</li>
@@ -107,7 +132,9 @@ function About() {
               </li>
             </ul>
             <br />
-            <p>Awards:</p>
+            <b>
+              <p>Awards:</p>
+            </b>
             <br />
             <ul>
               <li>2020 Shortlisted, Derwent Art Prize. </li>
@@ -118,7 +145,10 @@ function About() {
               </li>
             </ul>
             <br />
-            <p>Education:</p>
+            <b>
+              <p>Education:</p>
+              <br />
+            </b>
             <ul>
               <li>
                 2022 BA Fine Art: Drawing. UAL: Camberwell College of the Arts,

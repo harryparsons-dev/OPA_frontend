@@ -99,7 +99,12 @@ const Gallery = () => {
     Authorization: `Bearer ${token}`,
   });
 
-  if (loading) return <p style={{ textAlign: "center" }}>Loading{dots}</p>;
+  if (loading)
+    return (
+      <div className="loading" style={{ textAlign: "center" }}>
+        Loading{dots}
+      </div>
+    );
 
   if (error) return <p>Error :( Please refresh page</p>;
   // if (data === null || data.posts === null || data.posts.data.length === 0) {

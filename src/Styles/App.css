@@ -88,6 +88,13 @@ Main {
   -webkit-transform: rotate(45deg) translate(-8px, -8px);
   transform: rotate(45deg) translate(-8px, -8px);
 }
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  font-size: 1.5em;
+}
 @media (max-width: 600px) {
   .App {
     margin: 10px 10px 0px;
@@ -98,5 +105,8 @@ Main {
   .nav {
     /* position: fixed; */
     /* overflow: hidden; */
+  }
+  .loading {
+    height: 70vh;
   }
 }

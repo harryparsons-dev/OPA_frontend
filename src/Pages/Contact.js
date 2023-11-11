@@ -36,7 +36,6 @@ function Contact() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
     >
-      {!isLoaded && <p style={{ textAlign: "center" }}>Loading{dots}</p>}
       <div className="c-title">Contact</div>
       <div className="c-container">
         <div className="image">

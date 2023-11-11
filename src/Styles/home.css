@@ -1,51 +1,37 @@
 @keyframes fade {
-  0% {
+  from {
     opacity: 0;
   }
-  100% {
-    opacity: 100;
+  to {
+    opacity: 1;
   }
 }
 
 .home-slider {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
-
-/* .h-image-container img {
-  align-items: center;
-  width: auto;
-  max-width: 85vw;
-  max-height: 85vh;
-  max-width: 100%;
-  height: auto;
-  opacity: 1;
-  transition: opacity 0.8s ease-in-out;
-  transition: fadein 0.5s ease-in-out;
-} */
-
-/* .h-image-container img.loaded {
-  opacity: 1;
-} */
 
 .h-image-container {
-  position: relative;
-  position: relative;
-  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100%; */
+  height: 85vh;
 }
+
 .h-image-container img {
   max-width: 85vw;
-  max-height: 85vh;
+  max-height: 100vh;
   object-fit: contain;
 }
 
 .h-image-container > div {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* transform: translateX(-50%); */
-  opacity: 0;
-  /* transform: translateY(-50%, 50%); */
+
   transition: opacity 0.7s ease-in-out;
+  opacity: 0;
 }
 
 .h-image-container > div.visible {
@@ -53,12 +39,7 @@
 }
 
 @media (max-width: 600px) {
-  .home-slider {
-    /* overflow: hidden; */
-  }
-  .h-image-container > div {
-    transform: translate(-50%, -90%);
-  }
-  .h-image-container > div.visible {
+  .h-image-container {
+    height: 70vh;
   }
 }

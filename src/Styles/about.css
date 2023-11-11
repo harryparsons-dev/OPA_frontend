@@ -31,15 +31,22 @@
 
 @media (max-width: 600px) {
   .a-content .text {
-    padding: 0;
     padding-bottom: 30px;
-    width: 90%;
+    width: 85%;
   }
   .a-content .img {
     height: 100%;
-    padding: 4%;
+    padding: 0;
+    padding-left: 0px;
+    display: flex;
+    justify-content: center;
   }
-  .img img {
+  .a-content .img img {
     width: 100%;
+    padding-left: 0px;
+    max-width: 90%;
+  }
+  ul { 
+    text-align: left;
   }
 }
