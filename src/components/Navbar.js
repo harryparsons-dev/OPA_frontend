@@ -15,7 +15,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
       },
     });
     const data = await response.json();
-    setProj(data.data[0].attributes.UID);
+    setProj(data.data[0] ? data.data[0].attributes.UID: 1);
   };
   useEffect(() => {
     try {
@@ -63,7 +63,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
             handleToggle();
           }}
         >
-          Projects
+          Projects & Exhibitions
         </Link>
       </li>
       <li>

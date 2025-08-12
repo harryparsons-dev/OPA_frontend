@@ -12,6 +12,7 @@ const POSTS = gql`
   query getPosts($name: String!) {
     posts(
       filters: { catagory: { UID: { eq: $name } } }
+      sort: "id:ASC"
       pagination: { limit: 100 }
     ) {
       data {
@@ -62,7 +63,6 @@ function ProjectView() {
 
   const handleScrollPosition = () => {
     const scrollPos = sessionStorage.getItem("scrollPosition_projects");
-    console.log(scrollPos);
     if (scrollPos) {
       window.scrollTo(0, parseInt(scrollPos));
       sessionStorage.removeItem("scrollPosition_projects");
@@ -114,6 +114,8 @@ function ProjectView() {
     dirty = data.posts.data[0].attributes.catagory.data.attributes.Projecttext;
     clean = sanitizeHtml(dirty);
   }
+
+  console.log(data.posts.data)
 
   return (
     <motion.div

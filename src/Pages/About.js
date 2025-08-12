@@ -38,6 +38,8 @@ function About() {
     >
       {!isLoaded && <div className="loading">Loading...</div>}
 
+
+     <div>
       <div className="a-title">About</div>
 
       <div className="a-content">
@@ -162,6 +164,7 @@ function About() {
           </div>
         )}
       </div>
+</div>
     </motion.div>
   );
 }

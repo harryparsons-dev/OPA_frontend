@@ -107,9 +107,6 @@ const Gallery = () => {
     );
 
   if (error) return <p>Error :( Please refresh page</p>;
-  // if (data === null || data.posts === null || data.posts.data.length === 0) {
-  //   // data.post.data[0].attributes.title = "No posts";
-  // }
 
   function checkLoad(index) {
     if (index === data.posts.data.length - 1) {
@@ -125,12 +122,12 @@ const Gallery = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.15 }}
     >
-      {/* <div className="heading">{yearid}</div> */}
+
 
       <div className="years">
         {years.map((year, id) => (
           <div className="year" key={id}>
-            {/* {year.attributes.year !== yearid ? ( */}
+     
             <Link to={"/Gallery/" + year.attributes.year}>
               <div
                 style={
