@@ -93,7 +93,8 @@ Main {
   justify-content: center;
   align-items: center;
   height: 85vh;
-  font-size: 1.5em;
+  font-size: 1em;
+  font-style: italic;
 }
 @media (max-width: 600px) {
   .App {

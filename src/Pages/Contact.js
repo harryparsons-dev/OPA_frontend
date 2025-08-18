@@ -36,6 +36,9 @@ function Contact() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
     >
+          {!isLoaded &&   <div className="loading" style={{ textAlign: "center" }}>
+        Loading{dots}
+      </div>}
       {isLoaded && <div className="c-title">Contact</div>}
       <div className="c-container">
         <div className="image">
@@ -43,6 +46,7 @@ function Contact() {
             src={contactImage}
             alt={"contactImage"}
             onLoad={handleImageLoad}
+            style={{ display: isLoaded ? "block" : "none" }}
           />
         </div>
         {isLoaded && (

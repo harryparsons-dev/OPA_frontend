@@ -36,7 +36,9 @@ function About() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
     >
-      {!isLoaded && <div className="loading">Loading...</div>}
+      {!isLoaded &&   <div className="loading" style={{ textAlign: "center" }}>
+        Loading{dots}
+      </div>}
 
 
      <div>
@@ -94,7 +96,7 @@ function About() {
             <strong>Sat 20 Sept:&nbsp;&nbsp;</strong>10am – 4pm <br/>
             <strong>Sun 21 Sept:&nbsp;&nbsp;</strong>10am – 4pm <br/>
             <br/>
-            <a href="https://devonartistnetwork.co.uk/studio/olivia-parsons" target="_blank" rel="noopener" style={{textDecoration: 'underline'}}>More details here →</a>
+            <a href="https://devonartistnetwork.co.uk/studio/olivia-parsons" target="_blank" rel="noopener" style={{textDecoration: 'underline'}}>More details here  &rarr;</a>
           <p>
             <br/>
                    <hr/>

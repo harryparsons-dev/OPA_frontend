@@ -39,6 +39,7 @@
   .a-content .a-text {
     padding-bottom: 30px;
     width: 85%;
+    padding-left: 0px;
   }
   .a-content .img {
     height: 100%;
