@@ -1,3 +1,4 @@
+
 .a-content {
   display: flex;
   flex-direction: row-reverse;
@@ -5,8 +6,12 @@
   flex-wrap: wrap;
   position: relative;
   object-fit: contain;
-  margin-top: 5%;
+  margin-top: 1%;
   padding-bottom: 50px;
+}
+.a-text{
+    line-height:2;
+    font-size:14px;
 }
 
 .a-title {
@@ -24,13 +29,14 @@
   height: 400px;
 }
 
-.a-content .text {
+.a-content .a-text {
   width: 50%;
   padding-left: 6%;
 }
 
+
 @media (max-width: 600px) {
-  .a-content .text {
+  .a-content .a-text {
     padding-bottom: 30px;
     width: 85%;
   }
