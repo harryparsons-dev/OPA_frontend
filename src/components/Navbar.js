@@ -15,7 +15,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
       },
     });
     const data = await response.json();
-    setProj(data.data[0] ? data.data[0].attributes.UID: 1);
+    setProj(data.data[0].attributes.UID);
   };
   useEffect(() => {
     try {

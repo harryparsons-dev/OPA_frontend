@@ -36,7 +36,7 @@ function Contact() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.18 }}
     >
-      <div className="c-title">Contact</div>
+      {isLoaded && <div className="c-title">Contact</div>}
       <div className="c-container">
         <div className="image">
           <img

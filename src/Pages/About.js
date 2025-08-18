@@ -40,7 +40,7 @@ function About() {
 
 
      <div>
-      <div className="a-title">About</div>
+     {isLoaded && <div className="a-title">About</div>}
 
       <div className="a-content">
         <div className="img">
