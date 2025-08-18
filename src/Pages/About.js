@@ -95,7 +95,7 @@ function About() {
             <strong>Fri 19 Sept:&nbsp;&nbsp;</strong>2pm – 6pm <br/>
             <strong>Sat 20 Sept:&nbsp;&nbsp;</strong>10am – 4pm <br/>
             <strong>Sun 21 Sept:&nbsp;&nbsp;</strong>10am – 4pm <br/>
-            <br/>
+         
             <a href="https://devonartistnetwork.co.uk/studio/olivia-parsons" target="_blank" rel="noopener" style={{textDecoration: 'underline'}}>More details here  &rarr;</a>
           <p>
             <br/>

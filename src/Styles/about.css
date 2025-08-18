@@ -13,6 +13,11 @@
     line-height:2;
     font-size:14px;
 }
+.a-text ul{
+
+  list-style-type: none;
+
+}
 
 .a-title {
   position: relative;
