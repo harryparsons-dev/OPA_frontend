@@ -49,7 +49,7 @@ const Gallery = () => {
   const [dots, setDots] = useState(".");
 
   const raw_data = async () => {
-    const resYear = await fetch(`${api}/api/years?populate=*`, {
+    const resYear = await fetch(`${api}/api/years?populate=?sort=rank:asc*`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -170,7 +170,7 @@ const Gallery = () => {
                           >
                             <img
                               src={imagesapi + image.attributes.url}
-                              alt={image.attributes.formats.small.url}
+                              alt={image.attributes.formats.small ? image.attributes.formats.small : ""}
                               onLoad={() => checkLoad(ID)}
                             />
                           </Link>

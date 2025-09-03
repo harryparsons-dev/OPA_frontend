@@ -2,28 +2,10 @@ import { motion } from "framer-motion";
 import { React, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../Styles/Navbar.css";
-const api = process.env.REACT_APP_APIURL;
-const token = process.env.REACT_APP_TOKEN;
 
-function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
-  const [proj, setProj] = useState();
-  const raw_data = async () => {
-    const response = await fetch(`${api}/api/catagories?sort=rank:asc`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    setProj(data.data[0].attributes.UID);
-  };
-  useEffect(() => {
-    try {
-      raw_data();
-    } catch (e) {
-      console.error(e);
-    }
-  }, []);
+
+function Navbar({ navbarOpen, setNavbarOpen, handleToggle, galleryUrl, projectUrl }) {
+
 
   return (
     <motion.ul
@@ -46,7 +28,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
       </li>
       <li>
         <Link
-          to="/Gallery/2023"
+            to={`/Gallery/${galleryUrl}`}
           onClick={() => {
             setNavbarOpen(false);
             handleToggle();
@@ -57,7 +39,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle }) {
       </li>
       <li>
         <Link
-          to={`/Projects/${proj}`}
+          to={`/Projects/${projectUrl}`}
           onClick={() => {
             setNavbarOpen(false);
             handleToggle();

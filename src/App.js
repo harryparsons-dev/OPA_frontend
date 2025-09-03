@@ -3,10 +3,48 @@ import { FaInstagram } from "react-icons/fa";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import "./Styles/App.css";
+const api = process.env.REACT_APP_APIURL;
+const token = process.env.REACT_APP_TOKEN;
+
 
 const App = () => {
   const [change, setChange] = useState("false");
   const [navbarOpen, setNavbarOpen] = useState(false);
+
+
+  const [project, setProject] = useState();
+  const [gallery, setGallery] = useState();
+
+  const fetchProjects = async () => {
+    const response = await fetch(`${api}/api/catagories?sort=rank:asc`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    setProject(data.data[0].attributes.UID);
+  };
+
+  const fetchGallery = async () => {
+    try {
+      const response = await fetch(`${api}/api/years?sort=rank:asc`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      setGallery(data.data[0].attributes.year);
+    }catch(err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchProjects()
+    fetchGallery()
+  }, []);
 
   const handleToggle = () => {
     setChange(!change);
@@ -15,13 +53,7 @@ const App = () => {
     }
   };
 
-  const handleScrollPosition = () => {
-    const scrollPos = sessionStorage.getItem("scrollPosition");
-    if (scrollPos) {
-      window.scrollTo(0, parseInt(scrollPos));
-      sessionStorage.removeItem("scrollPosition");
-    }
-  };
+
   const handleClick = (e) => {
     sessionStorage.setItem("scrollPosition", window.scrollY);
   };
@@ -59,6 +91,8 @@ const App = () => {
             navbarOpen={navbarOpen}
             setNavbarOpen={setNavbarOpen}
             handleToggle={handleToggle}
+            projectUrl={project}
+            galleryUrl={gallery}
           />
         )}
       </div>
