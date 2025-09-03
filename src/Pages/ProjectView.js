@@ -12,7 +12,7 @@ const POSTS = gql`
   query getPosts($name: String!) {
     posts(
       filters: { catagory: { UID: { eq: $name } } }
-      sort: "createdAt:desc"
+      sort: "id:ASC"
       pagination: { limit: 100 }
     ) {
       data {
