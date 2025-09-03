@@ -46,11 +46,9 @@
 
 .Gallery .heading {
   padding: 10px;
-
   text-align: center;
   position: sticky;
   font-size: 1.3em;
-  text-decoration: underline;
 }
 .content-gallery {
   display: flex;
@@ -65,17 +63,6 @@
 
   align-items: center;
 }
-
-/* .content-gallery{
-    padding-top: 50px;
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-items: center;
-    align-items: center;
-
-
-
-}   */
 
 .post {
   width: 400px;
