@@ -34,7 +34,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle, galleryUrl, projectUr
             handleToggle();
           }}
         >
-          Artwork
+          Gallery
         </Link>
       </li>
       <li>
