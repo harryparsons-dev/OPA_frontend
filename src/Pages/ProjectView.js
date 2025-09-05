@@ -115,16 +115,21 @@ function ProjectView() {
     clean = sanitizeHtml(dirty);
   }
 
-  console.log(data.posts.data)
 
   return (
     <motion.div
-      className="projectView"
+
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
+      <div className="p-heading">
+        {data.posts.data &&data.posts.data.length > 0 ?
+            data.posts.data[0].attributes.catagory.data.attributes.project_name
+         : ""}
+      </div>
+      <div className="projectView">
       <div className="projects">
         {categories.map((category, id) => (
           <div className="project" key={id}>
@@ -142,23 +147,18 @@ function ProjectView() {
           </div>
         ))}
       </div>
-      {data.posts.data.length === 0 ? (
-        <div className="noPost">No content added yet, come back later!</div>
-      ) : (
         <div className="p-container">
-          <div className="p-heading">
-            {
-              data.posts.data[0].attributes.catagory.data.attributes
-                .project_name
-            }
-          </div>
+
           <div
-            className="text"
+            className="p-text"
             dangerouslySetInnerHTML={{ __html: clean }}
           ></div>
 
           <div className="p-content">
-            {data.posts.data.map((post, id) => (
+            {data.posts.data.length === 0 ? (
+                <div>Add some content!</div>
+            ) : (
+           <> {data.posts.data.map((post, id) => (
               <div className="p-post" key={post.id}>
                 {post.attributes.media.data.map((image, id2) => {
                   if (image.attributes.url.split(".").pop() === "jpg")
@@ -210,10 +210,13 @@ function ProjectView() {
                 })}
                 <div className="cap">{post.attributes.caption}</div>
               </div>
-            ))}
+            ))}</>
+            )
+                }
+
           </div>
         </div>
-      )}
+      </div>
     </motion.div>
   );
 }

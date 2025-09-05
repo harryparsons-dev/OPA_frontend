@@ -16,14 +16,19 @@ const App = () => {
   const [gallery, setGallery] = useState();
 
   const fetchProjects = async () => {
-    const response = await fetch(`${api}/api/catagories?sort=rank:asc`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    setProject(data.data[0].attributes.UID);
+    try {
+      const response = await fetch(`${api}/api/catagories?sort=rank:asc`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+      setProject(data.data[0].attributes.UID);
+    }catch(error) {
+      console.log(error);
+    }
+
   };
 
   const fetchGallery = async () => {
