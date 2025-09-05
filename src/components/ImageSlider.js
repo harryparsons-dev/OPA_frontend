@@ -11,7 +11,7 @@ const api = process.env.REACT_APP_IMAGEURL;
 const POSTS = gql`
   query getPosts($year: String!) {
     posts(
-      sort: "year.year:desc"
+      sort: "createdAt:desc"
       filters: { year: { year: { eq: $year } } }
       pagination: { limit: 100 }
     ) {

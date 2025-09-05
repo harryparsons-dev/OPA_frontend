@@ -10,7 +10,7 @@ const POST = gql`
   query getPosts($id: ID!) {
     posts(
       filters: { catagory: { id: { eq: $id } } }
-      sort: "id:ASC"
+       sort: "createdAt:desc"
       pagination: { limit: 100 }
     ) {
       data {
