@@ -50,7 +50,7 @@ function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-     // setCurrent((prevCurrent) => (prevCurrent + 1) % props.length);
+      setCurrent((prevCurrent) => (prevCurrent + 1) % props.length);
     }, 4000);
 
     return () => clearInterval(interval);
@@ -68,7 +68,7 @@ function Home() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.3 }}
     >
       <div className="home-slider">
         <div className="h-image-container">

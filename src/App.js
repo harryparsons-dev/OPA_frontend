@@ -56,6 +56,7 @@ const App = () => {
     if (change) {
       handleClick();
     }
+    setNavbarOpen(!navbarOpen);
   };
 
 
@@ -71,7 +72,6 @@ const App = () => {
             className={`${change ? "ham" : "change"}`}
             onClick={() => {
               handleToggle();
-              setNavbarOpen(!navbarOpen);
             }}
           >
             <div className="bar1"></div>
@@ -88,18 +88,15 @@ const App = () => {
             <FaInstagram className="instagram" />{" "}
           </a>
         </div>
-
-        {!navbarOpen ? (
-          <Main />
-        ) : (
           <Navbar
-            navbarOpen={navbarOpen}
-            setNavbarOpen={setNavbarOpen}
-            handleToggle={handleToggle}
-            projectUrl={project}
-            galleryUrl={gallery}
-          />
-        )}
+              navbarOpen={navbarOpen}
+              setNavbarOpen={setNavbarOpen}
+              handleToggle={handleToggle}
+              projectUrl={project}
+              galleryUrl={gallery}
+
+            />
+          <Main/>
       </div>
     </div>
   );
