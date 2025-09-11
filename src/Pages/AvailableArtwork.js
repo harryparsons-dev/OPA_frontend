@@ -14,7 +14,7 @@ function AvailableArtwork() {
 
     const fetchAvailableArtworks = async () => {
         try {
-            const response = await fetch(`${api}/api/posts?populate=*&filters[is_available][$eq]=true&sort=createdAt`, {
+            const response = await fetch(`${api}/api/posts?populate=*&filters[is_available][$eq]=true&sort=createdAt:desc`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${token}`,
