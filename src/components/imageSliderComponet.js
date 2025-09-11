@@ -30,6 +30,11 @@ function ImageSliderComponent({isOpen = false, posts = [], postId = null, handle
         setLoading(false)
     }, [isOpen, postId, posts])
 
+
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? "hidden" : "unset";
+    }, [isOpen]);
+
     const close = () => {
         handleClose()
         setCurrent(null)
