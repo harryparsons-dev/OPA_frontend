@@ -46,7 +46,7 @@ const POSTS = gql`
 `;
 
 function ProjectView() {
-  const [categories, setcategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [dots, setDots] = useState("");
 
   const raw_data = async () => {
@@ -58,7 +58,7 @@ function ProjectView() {
     });
 
     const projects_data = await projects.json();
-    setcategories(projects_data.data);
+    setCategories(projects_data.data);
   };
 
   const handleScrollPosition = () => {
@@ -124,16 +124,11 @@ function ProjectView() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <div className="p-heading">
-        {data.posts.data &&data.posts.data.length > 0 ?
-            data.posts.data[0].attributes.catagory.data.attributes.project_name
-         : ""}
-      </div>
       <div className="projectView">
       <div className="projects">
         {categories.map((category, id) => (
           <div className="project" key={id}>
-            <Link to={"/Projects/" + category.attributes.UID}>
+            <Link to={"/projects/" + category.attributes.UID}>
               <div
                 style={
                   category.attributes.UID !== projectUID
@@ -148,7 +143,11 @@ function ProjectView() {
         ))}
       </div>
         <div className="p-container">
-
+          <div className="p-heading">
+            {data.posts.data &&data.posts.data.length > 0 ?
+                data.posts.data[0].attributes.catagory.data.attributes.project_name
+                : ""}
+          </div>
           <div
             className="p-text"
             dangerouslySetInnerHTML={{ __html: clean }}
@@ -167,7 +166,7 @@ function ProjectView() {
                         <div className="p-imagecontainer">
                           <Link
                             to={
-                              "/Projects/view/" +
+                              "/projects/view/" +
                               data.posts.data[0].attributes.catagory.data.id +
                               "/" +
                               id
@@ -188,7 +187,7 @@ function ProjectView() {
                         <div className="imgcontainer">
                           <Link
                             to={
-                              "/Projects/view/" +
+                              "/projects/view/" +
                               data.posts.data[0].attributes.catagory.data.id +
                               "/" +
                               id

@@ -91,6 +91,7 @@ function ImageSlider() {
   if (!Array.isArray(data.posts.data) || length <= 0) {
     return null;
   }
+
   return (
     <motion.div
       className="ImageSlider"

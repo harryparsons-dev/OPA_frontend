@@ -28,7 +28,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle, galleryUrl, projectUr
       </li>
       <li>
         <Link
-            to={`/Gallery/${galleryUrl}`}
+            to={`/gallery/${galleryUrl}`}
           onClick={() => {
             setNavbarOpen(false);
             handleToggle();
@@ -39,7 +39,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle, galleryUrl, projectUr
       </li>
       <li>
         <Link
-          to={`/Projects/${projectUrl}`}
+          to={`/projects/${projectUrl}`}
           onClick={() => {
             setNavbarOpen(false);
             handleToggle();
@@ -48,9 +48,18 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle, galleryUrl, projectUr
           Projects & Exhibitions
         </Link>
       </li>
+        <li>
+            <Link to={"/available-artwork"}
+                  onClick={() => {
+                setNavbarOpen(false);
+                handleToggle();
+            }}>
+                Available Artwork
+            </Link>
+        </li>
       <li>
         <Link
-          to="/About"
+          to="/about"
           onClick={() => {
             setNavbarOpen(false);
             handleToggle();
@@ -61,7 +70,7 @@ function Navbar({ navbarOpen, setNavbarOpen, handleToggle, galleryUrl, projectUr
       </li>
       <li>
         <Link
-          to="/Contact"
+          to="/contact"
           onClick={() => {
             setNavbarOpen(false);
             handleToggle();

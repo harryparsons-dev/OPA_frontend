@@ -128,7 +128,7 @@ const Gallery = () => {
         {years.map((year, id) => (
           <div className="year" key={id}>
      
-            <Link to={"/Gallery/" + year.attributes.year}>
+            <Link to={"/gallery/" + year.attributes.year}>
               <div
                 style={
                   year.attributes.year !== yearid ? {} : { fontWeight: "bold" }
@@ -160,7 +160,7 @@ const Gallery = () => {
                         >
                           <Link
                             to={
-                              "/Gallery/" +
+                              "/gallery/" +
                               data.posts.data[0].attributes.year.data.attributes
                                 .year +
                               "/view/" +
@@ -183,7 +183,7 @@ const Gallery = () => {
                         <div className="imgcontainer">
                           <Link
                             to={
-                              "/Gallery/" +
+                              "/gallery/" +
                               data.posts.data[0].attributes.year.data.attributes
                                 .year +
                               "/view/" +

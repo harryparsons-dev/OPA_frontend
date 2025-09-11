@@ -82,6 +82,7 @@
   opacity: 1;
   width: 100%;
   transition: 0.5s ease;
+  border-radius: 6px;
   /* backface-visibility: hidden; */
 }
 .Gallery .post video {
@@ -100,7 +101,7 @@
 }
 .post .cap {
   padding: 5px;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: lighter;
   color: grey;
 }
