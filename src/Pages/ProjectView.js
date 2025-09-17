@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import sanitizeHtml from "sanitize-html";
 import "../Styles/projectView.css";
+import ImageSliderComponent from "../components/imageSliderComponet";
 const api = process.env.REACT_APP_IMAGEURL;
 const API_URL = process.env.REACT_APP_APIURL + "/api/catagories?sort=rank:asc";
 const token = process.env.REACT_APP_TOKEN;
@@ -47,7 +48,10 @@ const POSTS = gql`
 
 function ProjectView() {
   const [categories, setCategories] = useState([]);
+  const [isImageSliderOpen, setIsImageSliderOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
   const [dots, setDots] = useState("");
+
 
   const raw_data = async () => {
     const projects = await fetch(`${API_URL}`, {
@@ -61,19 +65,10 @@ function ProjectView() {
     setCategories(projects_data.data);
   };
 
-  const handleScrollPosition = () => {
-    const scrollPos = sessionStorage.getItem("scrollPosition_projects");
-    if (scrollPos) {
-      window.scrollTo(0, parseInt(scrollPos));
-      sessionStorage.removeItem("scrollPosition_projects");
-    }
-  };
-  const handleClick = (e) => {
-    sessionStorage.setItem("scrollPosition_projects", window.scrollY);
-  };
+
+
 
   useEffect(() => {
-    handleScrollPosition();
     raw_data();
     const interval = setInterval(() => {
       setDots((prev) => {
@@ -115,6 +110,10 @@ function ProjectView() {
     clean = sanitizeHtml(dirty);
   }
 
+  function openImageSlider(id) {
+    setIsImageSliderOpen(true);
+    setCurrentImage(id);
+  }
 
   return (
     <motion.div
@@ -162,38 +161,16 @@ function ProjectView() {
                 {post.attributes.media.data.map((image, id2) => {
                   if (image.attributes.url.split(".").pop() === "jpg")
                     return (
-                      <div key={id}>
-                        <div className="p-imagecontainer">
-                          <Link
-                            to={
-                              "/projects/view/" +
-                              data.posts.data[0].attributes.catagory.data.id +
-                              "/" +
-                              id
-                            }
-                            onClick={() => handleClick()}
-                          >
+                      <div key={id} className="p-imagecontainer" onClick={() => openImageSlider(post.id)}>
                             <img
                               src={api + image.attributes.url}
-                              alt={image.attributes.formats.small.url}
+                              alt={image.attributes.url}
                             />
-                          </Link>
-                        </div>
-                      </div>
+                          </div>
                     );
                   else
                     return (
-                      <div key={id}>
-                        <div className="imgcontainer">
-                          <Link
-                            to={
-                              "/projects/view/" +
-                              data.posts.data[0].attributes.catagory.data.id +
-                              "/" +
-                              id
-                            }
-                            onClick={() => handleClick()}
-                          >
+                      <div key={id} className="p-imgcontainer"   onClick={() => openImageSlider(post.id)}>
                             <video
                               className="video"
                               controls="controls autoplay"
@@ -202,9 +179,7 @@ function ProjectView() {
                                 src={api + image.attributes.url + "#t=0.001"}
                               />
                             </video>
-                          </Link>
                         </div>
-                      </div>
                     );
                 })}
                 <div className="cap">{post.attributes.caption}</div>
@@ -216,6 +191,7 @@ function ProjectView() {
           </div>
         </div>
       </div>
+      <ImageSliderComponent posts={data.posts.data} postId={currentImage} isOpen={isImageSliderOpen}  handleClose={() => setIsImageSliderOpen(false)} />
     </motion.div>
   );
 }

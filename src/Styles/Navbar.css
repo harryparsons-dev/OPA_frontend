@@ -5,7 +5,7 @@
     top:73px;
     text-decoration: none;
     background-color: #f7f7f7;
-    transition: opacity 0.2s ease-in-out, z-index 0.2s ease-in-out;
+    transition: display 0.2s ease-in-out, z-index 0.2s ease-in-out;
     Z-index: 1000;
 }
 .navbar-open {
@@ -15,6 +15,7 @@
 
 .navbar-closed {
     opacity: 0;
+    display: none;
     z-index: 0;
 }
 .navbar li {

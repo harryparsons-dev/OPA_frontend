@@ -61,17 +61,7 @@ const Gallery = () => {
 
     const dataYear = await resYear.json();
     setsYears(dataYear.data);
-    handleScrollPosition();
   };
-
-  const handleScrollPosition = () => {
-    const scrollPos = sessionStorage.getItem("scrollPosition");
-    if (scrollPos) {
-      window.scrollTo(0, parseInt(scrollPos));
-      sessionStorage.removeItem("scrollPosition");
-    }
-  };
-
 
   useEffect(() => {
     raw_data();
@@ -158,13 +148,11 @@ const Gallery = () => {
                 {post.attributes.media.data.map((image, id2) => {
                   if (image.attributes.url.split(".").pop() === "jpg")
                     return (
-                      <div key={`jpg-${image.id}`}>
                         <div
-                          className="imgcontainer"
-                          style={loaded ? {} : { display: "none" }}
-                        >
-                          <div
+                              key={`jpg-${image.id}`}
                             onClick={() => openImageSlider(post.id)}
+                              className="imgcontainer"
+                              style={loaded ? {} : { display: "none" }}
                           >
                             <img
                               src={imagesapi + image.attributes.url}
@@ -172,15 +160,13 @@ const Gallery = () => {
                               onLoad={() => checkLoad(ID)}
                             />
                           </div>
-                        </div>
-                      </div>
                     );
                   else
                     return (
-                      <div key={`video-${image.id}`}>
-                        <div className="imgcontainer">
                           <div
-                            onClick={() => openImageSlider(post.id)}
+                              key={`video-${image.id}`}
+                              className="imgcontainer"
+                              onClick={() => openImageSlider(post.id)}
                           >
                             <video
                               className="video"
@@ -193,8 +179,6 @@ const Gallery = () => {
                                 }
                               />
                             </video>
-                          </div>
-                        </div>
                       </div>
                     );
                 })}
