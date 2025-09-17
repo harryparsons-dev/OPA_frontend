@@ -76,7 +76,7 @@ function ImageSliderComponent({isOpen = false, posts = [], postId = null, handle
                                                     <img
                                                         src={api + image.attributes.url}
                                                         className="image"
-                                                        alt={image.attributes.formats.large.url}
+                                                        alt={image.attributes.url}
                                                     />
                                                 )}
                                         </div>
