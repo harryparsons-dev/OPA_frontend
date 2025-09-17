@@ -3,6 +3,7 @@ import { FaInstagram } from "react-icons/fa";
 import Main from "./components/Main";
 import Navbar from "./components/Navbar";
 import "./Styles/App.css";
+import {useLocation} from "react-router-dom";
 const api = process.env.REACT_APP_APIURL;
 const token = process.env.REACT_APP_TOKEN;
 
@@ -10,10 +11,12 @@ const token = process.env.REACT_APP_TOKEN;
 const App = () => {
   const [change, setChange] = useState("false");
   const [navbarOpen, setNavbarOpen] = useState(false);
-
-
   const [project, setProject] = useState();
   const [gallery, setGallery] = useState();
+
+
+  const location = useLocation();
+
 
   const fetchProjects = async () => {
     try {
@@ -51,14 +54,15 @@ const App = () => {
     fetchGallery()
   }, []);
 
-  const handleToggle = () => {
-    setChange(!change);
-    if (change) {
-      handleClick();
-    }
-    setNavbarOpen(!navbarOpen);
-  };
+  const handleToggle =  () => {
+      setChange(!change);
+      setNavbarOpen(!navbarOpen);
 
+  };
+  useEffect(() => {
+    setNavbarOpen(false)
+    setChange(true);
+  }, [location]);
 
   const handleClick = (e) => {
     sessionStorage.setItem("scrollPosition", window.scrollY);
@@ -90,8 +94,6 @@ const App = () => {
         </div>
           <Navbar
               navbarOpen={navbarOpen}
-              setNavbarOpen={setNavbarOpen}
-              handleToggle={handleToggle}
               projectUrl={project}
               galleryUrl={gallery}
 

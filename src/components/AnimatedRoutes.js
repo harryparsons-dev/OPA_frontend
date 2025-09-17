@@ -14,7 +14,6 @@ function AnimatedRoutes() {
   const location = useLocation();
   return (
     <>
-      <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route exact path="*" element={<Home />}></Route>
           <Route path="/gallery/:yearid" element={<Gallery />}></Route>
@@ -31,7 +30,6 @@ function AnimatedRoutes() {
           <Route path="/about" element={<About />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
         </Routes>
-      </AnimatePresence>
     </>
   );
 }

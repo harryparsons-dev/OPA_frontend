@@ -39,6 +39,8 @@ function AvailableArtwork() {
     },[])
 
 
+
+
     if(availableArtworks.length === 0){
         return <div style={{textAlign:'center'}}>No available artwork</div>
     }
