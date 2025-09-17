@@ -170,7 +170,7 @@ function ProjectView() {
                     );
                   else
                     return (
-                      <div key={id} className="p-imgcontainer"   onClick={() => openImageSlider(post.id)}>
+                      <div key={id} className="imgcontainer"   onClick={() => openImageSlider(post.id)}>
                             <video
                               className="video"
                               controls="controls autoplay"
