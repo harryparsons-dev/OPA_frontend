@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "../Styles/Gallery.css";
+import ImageSliderComponent from "../components/imageSliderComponet";
 const imagesapi = process.env.REACT_APP_IMAGEURL;
 const api = process.env.REACT_APP_APIURL;
 const token = process.env.REACT_APP_TOKEN;
@@ -46,6 +47,8 @@ const POSTS = gql`
 const Gallery = () => {
   const [years, setsYears] = useState([]);
   const [loaded, setLoaded] = useState(false);
+  const [isImageSliderOpen, setIsImageSliderOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
   const [dots, setDots] = useState(".");
 
   const raw_data = async () => {
@@ -68,9 +71,7 @@ const Gallery = () => {
       sessionStorage.removeItem("scrollPosition");
     }
   };
-  const handleClick = (e) => {
-    sessionStorage.setItem("scrollPosition", window.scrollY);
-  };
+
 
   useEffect(() => {
     raw_data();
@@ -113,7 +114,11 @@ const Gallery = () => {
       setLoaded(true);
     }
   }
-  //data = data.reverse();
+
+  function openImageSlider(id) {
+    setIsImageSliderOpen(true);
+    setCurrentImage(id);
+  }
   return (
     <motion.div
       className="Gallery"
@@ -158,22 +163,15 @@ const Gallery = () => {
                           className="imgcontainer"
                           style={loaded ? {} : { display: "none" }}
                         >
-                          <Link
-                            to={
-                              "/gallery/" +
-                              data.posts.data[0].attributes.year.data.attributes
-                                .year +
-                              "/view/" +
-                              ID
-                            }
-                            onClick={() => handleClick()}
+                          <div
+                            onClick={() => openImageSlider(post.id)}
                           >
                             <img
                               src={imagesapi + image.attributes.url}
                               alt={image.attributes.formats.small ? image.attributes.formats.small : ""}
                               onLoad={() => checkLoad(ID)}
                             />
-                          </Link>
+                          </div>
                         </div>
                       </div>
                     );
@@ -181,15 +179,8 @@ const Gallery = () => {
                     return (
                       <div key={`video-${image.id}`}>
                         <div className="imgcontainer">
-                          <Link
-                            to={
-                              "/gallery/" +
-                              data.posts.data[0].attributes.year.data.attributes
-                                .year +
-                              "/view/" +
-                              ID
-                            }
-                            onClick={() => handleClick()}
+                          <div
+                            onClick={() => openImageSlider(post.id)}
                           >
                             <video
                               className="video"
@@ -202,7 +193,7 @@ const Gallery = () => {
                                 }
                               />
                             </video>
-                          </Link>
+                          </div>
                         </div>
                       </div>
                     );
@@ -213,6 +204,7 @@ const Gallery = () => {
           </div>
         </div>
       )}
+      <ImageSliderComponent posts={data.posts.data} postId={currentImage} isOpen={isImageSliderOpen}  handleClose={() => setIsImageSliderOpen(false)} />
     </motion.div>
   );
 };
