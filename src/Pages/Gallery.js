@@ -8,50 +8,26 @@ const imagesapi = process.env.REACT_APP_IMAGEURL;
 const api = process.env.REACT_APP_APIURL;
 const token = process.env.REACT_APP_TOKEN;
 
-const POSTS = gql`
-  query getPosts($year: String!) {
-    posts(
-     sort: "createdAt:desc"
-      filters: { year: { year: { eq: $year } } }
-      pagination: { limit: 100 }
-    ) {
-      data {
-        id
-        attributes {
-          title
-          UID
-          caption
-          media {
-            data {
-              attributes {
-                formats
-                url
-              }
-            }
-          }
-
-          year {
-            data {
-              id
-              attributes {
-                year
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 const Gallery = () => {
+  const { yearid } = useParams();
+
   const [years, setsYears] = useState([]);
-  const [loaded, setLoaded] = useState(false);
+  const [posts, setPosts] = useState([]);
   const [isImageSliderOpen, setIsImageSliderOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [dots, setDots] = useState(".");
 
-  const raw_data = async () => {
+
+  // loading
+  const [isLoading, setIsLoading] = useState(true)
+  const [isAllPostsLoaded, setIsAllPostsLoaded] = useState(false)
+
+  // errors
+  const [postsError, setPostsError] = useState(false)
+
+
+  const fetchYears = async () => {
     const resYear = await fetch(`${api}/api/years?populate=?sort=rank:asc*`, {
       method: "GET",
       headers: {
@@ -63,8 +39,28 @@ const Gallery = () => {
     setsYears(dataYear.data);
   };
 
+  const fetchPosts = async () => {
+    try{
+    const response  =await fetch(`${api}/api/posts?populate=*&sort=createdAt:desc&filters[year][year][$eq]=${yearid}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+      const data = await response.json();
+      setPosts(data.data)
+  }catch(err){
+    console.log(err)
+    setPostsError(true)
+  } 
+  }
+
+
   useEffect(() => {
-    raw_data();
+    fetchYears();
+    fetchPosts();
+
+    setIsLoading(false)
     const interval = setInterval(() => {
       setDots((prev) => {
         switch (prev) {
@@ -83,25 +79,22 @@ const Gallery = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const { yearid } = useParams();
-  // const data = [];
-  const { loading, error, data } = useQuery(POSTS, {
-    variables: { year: yearid },
-    Authorization: `Bearer ${token}`,
-  });
 
-  if (loading)
+
+
+  if (isLoading)
     return (
       <div className="loading" style={{ textAlign: "center" }}>
         Loading{dots}
       </div>
     );
 
-  if (error) return <p>Error :( Please refresh page</p>;
+  if (postsError) return <p>Error :( Please refresh page</p>;
 
   function checkLoad(index) {
-    if (index === data.posts.data.length - 1) {
-      setLoaded(true);
+
+    if (index === posts.length - 1) {
+      setIsAllPostsLoaded(true);
     }
   }
 
@@ -136,28 +129,27 @@ const Gallery = () => {
           </div>
         ))}
       </div>
-      {data.posts.data.length === 0 ? (
+      {posts.length === 0 ? (
         <div className="noPost">No content added yet, come back later!</div>
       ) : (
         <div className="gal-content">
           <div className="heading">{yearid}</div>
 
           <div className="content-gallery">
-            {data.posts.data?.map((post, ID) => (
-              <div className="post" key={post.id}>
+            {posts?.map((post, ID) => (
+              <div className="post" key={post.id} style={isAllPostsLoaded ? {} : { display: "none" }} >
                 {post.attributes.media.data.map((image, id2) => {
                   if (image.attributes.url.split(".").pop() === "jpg")
                     return (
                         <div
                               key={`jpg-${image.id}`}
-                            onClick={() => openImageSlider(post.id)}
+                              onClick={() => openImageSlider(post.id)}
                               className="imgcontainer"
-                              style={loaded ? {} : { display: "none" }}
                           >
                             <img
                               src={imagesapi + image.attributes.url}
                               alt={image.attributes.formats.small ? image.attributes.formats.small : ""}
-                              onLoad={() => checkLoad(ID)}
+                              onLoad={() => checkLoad(parseInt(ID))}
                             />
                           </div>
                     );
@@ -188,7 +180,7 @@ const Gallery = () => {
           </div>
         </div>
       )}
-      <ImageSliderComponent posts={data.posts.data} postId={currentImage} isOpen={isImageSliderOpen}  handleClose={() => setIsImageSliderOpen(false)} />
+      <ImageSliderComponent posts={posts} postId={currentImage} isOpen={isImageSliderOpen}  handleClose={() => setIsImageSliderOpen(false)} />
     </motion.div>
   );
 };
