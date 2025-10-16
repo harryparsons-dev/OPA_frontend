@@ -11,6 +11,17 @@
   }
 }
 
+.loading::after {
+  content: '...';
+  animation: dots 1s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: '.'; }
+  40% { content: '..'; }
+  60%, 100% { content: '...'; }
+}
+
 .Gallery .container {
 }
 .gal-content {
